@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "category": "Technical",
+    "image": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=600",
+    "heading": "Annual Hackathon",
+    "description": "24-hour coding competition open to all students.",
+    "event_date": "July 20-21, 2025"
+  },
+  {
+    "id": 2,
+    "category": "Cultural",
+    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600",
+    "heading": "Cultural Festival",
+    "description": "Music, dance, drama and more.",
+    "event_date": "Aug 15-17, 2025"
+  },
+  {
+    "id": 3,
+    "category": "Sports",
+    "image": "https://images.unsplash.com/photo-1505842465776-3d90f616310d?w=600",
+    "heading": "Sports Meet",
+    "description": "Annual inter-college sports competitions.",
+    "event_date": "Sep 5-7, 2025"
+  },
+  {
+    "id": 4,
+    "category": "Workshop",
+    "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600",
+    "heading": "Resume Building Workshop",
+    "description": "Learn how to craft a professional resume.",
+    "event_date": "Oct 1, 2025"
+  }
+]

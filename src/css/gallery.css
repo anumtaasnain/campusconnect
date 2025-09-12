@@ -1,0 +1,98 @@
+/* Page container */
+.gallery-page {
+  padding: 2rem;
+  background: #fff;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Title */
+.gallery-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #3b2f1e;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.gallery-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #8b5e34;
+  margin: 0.5rem auto 1.5rem auto;
+  border-radius: 2px;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  gap: 10px;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border: 2px solid #cbd5e1;
+  background: #fff;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: #444;
+}
+
+.filter-btn:hover {
+  border-color: #8b5e34;
+  color: #8b5e34;
+}
+
+.filter-btn.active {
+  background: #8b5e34;
+  color: #fff;
+  border-color: #8b5e34;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.gallery-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.category-tag {
+  display: inline-block;
+  margin: 10px;
+  padding: 3px 10px;
+  font-size: 0.8rem;
+  border-radius: 15px;
+  background: #f3f4f6;
+  color: #555;
+  border: 1px solid #ddd;
+}

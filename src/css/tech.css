@@ -1,0 +1,93 @@
+.banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            background-color: var(--soft-stone);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .card-title {
+            color: var(--dark-chocolate);
+            font-weight: 600;
+        }
+
+        .card-text {
+            color: var(--text);
+        }
+
+        .btn-custom {
+            background-color: var(--earthy-brown);
+            color: white;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: var(--dark-chocolate);
+            color: var(--muted);
+        }
+
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--earthy-brown);
+        }
+
+        .tech-icon {
+            font-size: 2rem;
+            color: var(--earthy-brown);
+            margin-bottom: 15px;
+        }
+
+        .progress {
+            height: 8px;
+            margin-bottom: 10px;
+            background-color: #e9ecef;
+        }
+
+        .progress-bar {
+            background-color: var(--earthy-brown);
+        }
+
+        .skill-level {
+            font-size: 0.85rem;
+            color: var(--warm-taupe);
+        }
