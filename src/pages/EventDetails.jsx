@@ -1,75 +1,105 @@
 import React from "react";
-import "../css/tech.css";
+import { useParams, Link } from "react-router-dom";
 import eventData from "../Json/details.json";
-import { useParams } from "react-router-dom";
+import "../css/tech.css";
 
-function EventDetails() {
+const EventDetails = () => {
   const { id } = useParams();
-  // Convert id to number since JSON ids are numbers
-  const event = eventData.find((e) => e.id === parseInt(id));
-  
+  const event = eventData.find((e) => String(e.id) === String(id));
+
   if (!event) {
-    return <h2>Event Not Found</h2>;
+    return (
+      <div className="container py-5 text-center">
+        <h2>❌ Event Not Found</h2>
+        <p>No data found for the requested event (id: {id})</p>
+        <Link to="/" className="btn btn-secondary mt-3">
+          ⬅ Back to Home
+        </Link>
+      </div>
+    );
   }
+  const { cardsData } = event
+  console.log(cardsData);
+  
 
   return (
     <div>
       {/* Banner Section */}
       <div className="banner">
-        <div className="container">
+        <div className="container" style={{display:"flex" , flexDirection:"column" , justifyContent:'center' ,alignItems:'center' }} >
           <h1 className="display-3 fw-bold">{event.heading}</h1>
           <p className="lead">{event.p}</p>
-          <a href="#tech-cards" className="btn btn-custom btn-lg mt-3">
-            Explore Skills
+          <a href="#cards-section" className="btn btnBanner btn-custom  mt-3" style={{height:'60px' , width:'250px' , borderRadius:''}} >
+            Explore More
           </a>
         </div>
       </div>
-      
-      {/* Tech Cards Section */}
-      <section id="tech-cards" className="py-5">
+
+      {/* Stats Section (fixed, optional numbers) */}
+      <section className="py-4 bg-light">
+        <div className="container">
+          <div className="row text-center">
+            <div className="col-md-3 col-6 mb-4">
+              <div className="stats-number">12+</div>
+              <div className="stats-label">Projects/Events</div>
+            </div>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="stats-number">25+</div>
+              <div className="stats-label">Teams Joined</div>
+            </div>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="stats-number">15+</div>
+              <div className="stats-label">Achievements</div>
+            </div>
+            <div className="col-md-3 col-6 mb-4">
+              <div className="stats-number">8+</div>
+              <div className="stats-label">Years Experience</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cards Section */}
+      <section id="cards-section" className="py-5">
         <div className="container">
           <h2 className="section-title">{event.heading2}</h2>
           <div className="row g-4">
-            {event.cardsData.map((card, index) => (
-              <div key={index} className="col-md-6 col-lg-3">
+            {cardsData.map((card, idx) => (
+              <div className="col-md-6 col-lg-3" key={idx}>
                 <div className="card h-100">
-                  <div className="card-img-top">
-                    <i className={
-                      index === 0 ? "fab fa-react" : 
-                      index === 1 ? "fas fa-server" : 
-                      index === 2 ? "fas fa-palette" : 
-                      "fab fa-docker"
-                    } />
+                  <div
+                    className="card-img-top"
+                    style={{
+                      backgroundSize: "cover",
+                      // minHeight: "150px",
+                    }}
+                  > 
+                    <img src={card.img} alt="" style={{height:'200px' , width:'100%'}} />
+                    {/* <img src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?cs=srgb&dl=pexels-pixabay-302743.jpg&fm=jpg" alt="" /> */}
                   </div>
                   <div className="card-body">
-                    <div className="tech-icon">
-                      <i className={
-                        index === 0 ? "fas fa-paint-brush" : 
-                        index === 1 ? "fas fa-code" : 
-                        index === 2 ? "fas fa-drafting-compass" : 
-                        "fas fa-cloud"
-                      } />
-                    </div>
-                    <h5 className="card-title">{card[`h${index+1}`]}</h5>
-                    <p className="card-text">{card[`p${index+1}`]}</p>
-                    
-                    {/* Skill items would need to be customized per card or removed */}
+                    <h5 className="card-title">{card.title}</h5>
+                    <p className="card-text">{card.description}</p>
+
                     <div className="skill-item">
                       <div className="d-flex justify-content-between">
-                        <span>Skill Name</span>
-                        <span className="skill-level">Level</span>
+                        <span>{card.title}</span>
+                        <span className="skill-level">{card.levelText}</span>
                       </div>
                       <div className="progress">
-                        <div className="progress-bar" style={{ width: "80%" }} />
+                        <div
+                          className="progress-bar"
+                          style={{ width: `${card.levelPercent}%` }}
+                        />
                       </div>
                     </div>
-                    
+
                     <button
                       className="btn btn-custom mt-3"
                       data-bs-toggle="modal"
-                      data-bs-target={`#modal-${index}`}
+                      data-bs-target={`#modal${idx}`}
                     >
-                      View Details
+                      View More
                     </button>
                   </div>
                 </div>
@@ -78,39 +108,104 @@ function EventDetails() {
           </div>
         </div>
       </section>
-      
+
       {/* Additional Content Section */}
       <section className="py-5 bg-light">
         <div className="container">
-          <h2 className="section-title">{event.heading} Projects</h2>
+          <h2 className="section-title">{event.heading3}</h2>
           <div className="row">
             <div className="col-lg-6">
-              <img
-                src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                alt="Event Project"
-                className="img-fluid rounded"
-              />
+              {event.img ? (
+                <img
+                  src={event.img}
+                  alt="Event Achievements"
+                  className="img-fluid rounded"
+                />
+              ) : (
+                <img
+                  src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1350&q=80"
+                  alt="Fallback"
+                  className="img-fluid rounded"
+                />
+              )}
             </div>
             <div className="col-lg-6">
-              <h3>My {event.heading} Projects</h3>
-              <p>
-                I've worked on various projects that demonstrate my skills and 
-                abilities in {event.heading.toLowerCase()}. These projects showcase 
-                my expertise and dedication.
-              </p>
-              <p>
-                Each project follows best practices and demonstrates my capabilities 
-                in this area, ensuring quality results and positive outcomes.
-              </p>
+              <h3>{event.sideTxtH}</h3>
+              <p>{event.sideTxtP}</p>
               <a href="#" className="btn btn-custom">
-                View Projects
+                View Full Achievements
               </a>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Training Schedule Section (always visible for sports) */}
+      {event.id === 3 && (
+        <section className="py-5">
+          <div className="container">
+            <h2 className="section-title">Training Schedule</h2>
+            <div className="table-responsive">
+              <table className="table table-hover">
+                <thead className="table-dark">
+                  <tr>
+                    <th>Day</th>
+                    <th>Morning</th>
+                    <th>Afternoon</th>
+                    <th>Evening</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Monday</td>
+                    <td>Running (5km)</td>
+                    <td>Strength Training</td>
+                    <td>Football Practice</td>
+                  </tr>
+                  <tr>
+                    <td>Tuesday</td>
+                    <td>Swimming</td>
+                    <td>Rest</td>
+                    <td>Basketball Practice</td>
+                  </tr>
+                  <tr>
+                    <td>Wednesday</td>
+                    <td>Interval Training</td>
+                    <td>Yoga</td>
+                    <td>Tennis Practice</td>
+                  </tr>
+                  <tr>
+                    <td>Thursday</td>
+                    <td>Swimming</td>
+                    <td>Strength Training</td>
+                    <td>Football Practice</td>
+                  </tr>
+                  <tr>
+                    <td>Friday</td>
+                    <td>Running (5km)</td>
+                    <td>Rest</td>
+                    <td>Basketball Practice</td>
+                  </tr>
+                  <tr>
+                    <td>Saturday</td>
+                    <td>Match Day</td>
+                    <td>Recovery</td>
+                    <td>Strategy Session</td>
+                  </tr>
+                  <tr>
+                    <td>Sunday</td>
+                    <td>Active Recovery</td>
+                    <td>Family Time</td>
+                    <td>Planning Week Ahead</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
-}
+};
 
 export default EventDetails;

@@ -1,5 +1,5 @@
-.banner {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        .banner {
+            background-image: url(./eventBanner.jpeg);
             background-size: cover;
             background-position: center;
             color: white;
@@ -53,6 +53,13 @@
             color: var(--muted);
         }
 
+        footer {
+            background-color: var(--dark-chocolate);
+            color: var(--muted);
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
         .section-title {
             position: relative;
             padding-bottom: 15px;
@@ -71,7 +78,7 @@
             background-color: var(--earthy-brown);
         }
 
-        .tech-icon {
+        .sports-icon {
             font-size: 2rem;
             color: var(--earthy-brown);
             margin-bottom: 15px;
@@ -90,4 +97,15 @@
         .skill-level {
             font-size: 0.85rem;
             color: var(--warm-taupe);
+        }
+        
+        .stats-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--earthy-brown);
+        }
+        
+        .stats-label {
+            font-size: 0.9rem;
+            color: var(--text);
         }

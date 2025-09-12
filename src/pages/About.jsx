@@ -1,6 +1,5 @@
 import React from "react";
-import "../css/style.css";  
-
+import "../css/style.css";
 
 function Home() {
   return (
@@ -25,22 +24,24 @@ function Home() {
                   Connecting students, faculty, and the entire campus community
                   through memorable events and experiences.
                 </p>
-                <a href="#our-story" className="btn btn-accent me-3">
+                <a href="#our-story" className="  btn-accent me-3">
                   Our Story
                 </a>
-                <a href="#our-team" className="btn btn-outline-accent">
-                  Meet Our Team
-                </a>
+                 
               </div>
               <div className="col-lg-6 d-none d-lg-block">
                 <img
-                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&s=cc224d2b4e78fa2b1296b6d35d3d43d7"
+                  src="./a.jpg"
                   alt="College campus"
-                  className="img-fluid rounded shadow"
+                  className="img-fluid  rounded shadow"
                 />
+                
+                </div>
+
+
               </div>
             </div>
-          </div>
+          
         </section>
 
         <section className="content-section" id="our-story">
@@ -49,7 +50,7 @@ function Home() {
             <div className="row align-items-center">
               <div className="col-lg-6 mb-5 mb-lg-0">
                 <img
-                  src="https://images.unsplash.com/photo-1569848771194-2dbfe01f4e96?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&s=5e6a3e3e3e3e3e3e3e3e3e3e3e3e3e3e"
+                  src="./1.jpg"
                   alt="Campus event"
                   className="story-image w-100"
                 />
@@ -77,7 +78,7 @@ function Home() {
                   organize, promote, and manage hundreds of events each year.
                 </p>
                 <div className="mt-4">
-                  <a href="#" className="btn btn-accent">
+                  <a href="#" className="  btn-accent">
                     Learn More About Our Journey
                   </a>
                 </div>
@@ -325,14 +326,14 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="text-center mt-4">
-              <a href="#" className="btn btn-accent">
+            <div className="text-center ">
+              <a href="#" className="btn-lg btn-accent">
                 View Full Team
               </a>
             </div>
           </div>
         </section>
-        
+
         <section className="content-section">
           <div className="container-xl">
             <div className="row justify-content-center">
@@ -344,13 +345,13 @@ function Home() {
                   your activities, CampusConnect is here to help.
                 </p>
                 <div className="d-flex flex-wrap justify-content-center gap-3">
-                  <a href="#" className="btn btn-accent">
+                  <a href="/signup" className="  btn-accent">
                     Create an Account
                   </a>
-                  <a href="#" className="btn btn-outline-accent">
+                  <a href="/events" className="btn-outline-accent">
                     List an Event
                   </a>
-                  <a href="#" className="btn btn-outline-accent">
+                  <a href="/contact" className="btn-outline-accent">
                     Contact Us
                   </a>
                 </div>
@@ -360,52 +361,7 @@ function Home() {
         </section>
       </div>
 
-      <div className="category-container">
-        <h2 className="section-title">
-          <span style={{ color: "#ff4757" }}>Explore</span>{" "}
-          <span style={{ color: "var(--text-primary)" }}>Events</span>
-        </h2>
-        <div className="category-grid">
-          <div className="left category-item">
-            <video className="category-media" autoPlay loop muted playsInline>
-              <source
-                src="https://assets.mixkit.co/videos/preview/mixkit-business-meeting-in-a-modern-office-44659-large.mp4"
-                type="video/mp4"
-              />
-            </video>
-            <div className="overlay">
-              <h2 className="category-name">Upcoming Events</h2>
-              <button className="shop-btn">Explore Now</button>
-            </div>
-          </div>
-          <div className="right">
-            <div className="category-item right-top">
-              <video className="category-media" autoPlay loop muted playsInline>
-                <source
-                  src="https://assets.mixkit.co/videos/preview/mixkit-young-women-dancing-at-a-music-festival-50150-large.mp4"
-                  type="video/mp4"
-                />
-              </video>
-              <div className="overlay">
-                <h2 className="category-name">Recent Event</h2>
-                <button className="shop-btn">Explore Now</button>
-              </div>
-            </div>
-            <div className="category-item right-bottom">
-              <video className="category-media" autoPlay loop muted playsInline>
-                <source
-                  src="https://assets.mixkit.co/videos/preview/mixkit-students-walking-in-a-university-40556-large.mp4"
-                  type="video/mp4"
-                />
-              </video>
-              <div className="overlay">
-                <h2 className="category-name">Previous Events</h2>
-                <button className="shop-btn">Explore Now</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    
     </>
   );
 }

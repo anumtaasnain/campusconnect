@@ -42,7 +42,7 @@ function Footer() {
         <p className="small">Subscribe to get notifications about upcoming events and important announcements.</p>
         <div className="footer-newsletter">
           <input type="email" placeholder="Your email address" />
-          <button className="btn-accent w-100">Subscribe</button>
+          <button className="btn  w-100">Subscribe</button>
         </div>
       </div>
     </div>

@@ -2,33 +2,65 @@
   {
     "id": 1,
     "category": "Technical",
-    "image": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=600",
-    "heading": "Annual Hackathon",
-    "description": "24-hour coding competition open to all students.",
-    "event_date": "July 20-21, 2025"
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600", 
+    "heading": "AI & Robotics Summit",
+    "description": "Explore cutting-edge AI and robotics innovations.",
+    "event_date": "July 25-26, 2025"
   },
   {
     "id": 2,
     "category": "Cultural",
-    "image": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600",
-    "heading": "Cultural Festival",
-    "description": "Music, dance, drama and more.",
-    "event_date": "Aug 15-17, 2025"
+    "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600", 
+    "heading": "Global Culture Night",
+    "description": "Experience music, food, and traditions from around the world.",
+    "event_date": "Aug 20-22, 2025"
   },
   {
     "id": 3,
     "category": "Sports",
-    "image": "https://images.unsplash.com/photo-1505842465776-3d90f616310d?w=600",
-    "heading": "Sports Meet",
-    "description": "Annual inter-college sports competitions.",
-    "event_date": "Sep 5-7, 2025"
+    "image": "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?w=600", 
+    "heading": "Fitness Challenge",
+    "description": "Inter-college marathon and fitness competitions.",
+    "event_date": "Sep 10-12, 2025"
   },
   {
     "id": 4,
     "category": "Workshop",
-    "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600",
-    "heading": "Resume Building Workshop",
-    "description": "Learn how to craft a professional resume.",
-    "event_date": "Oct 1, 2025"
+    "image": "1.avif", 
+    "heading": "Public Speaking Workshop",
+    "description": "Master the art of confident communication.",
+    "event_date": "Oct 5, 2025"
+  },
+  {
+    "id": 5,
+    "category": "Technical",
+    "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600", 
+    "heading": "Cybersecurity Conference",
+    "description": "Hands-on sessions on ethical hacking and data protection.",
+    "event_date": "Nov 14-15, 2025"
+  },
+  {
+    "id": 6,
+    "category": "Cultural",
+    "image": "2.avif", 
+    "heading": "Art & Craft Exhibition",
+    "description": "Display of creative artworks and handmade crafts.",
+    "event_date": "Dec 1-3, 2025"
+  },
+  {
+    "id": 7,
+    "category": "Sports",
+    "image": "3.avif", 
+    "heading": "Football Championship",
+    "description": "Exciting football league between top colleges.",
+    "event_date": "Jan 15-17, 2026"
+  },
+  {
+    "id": 8,
+    "category": "Workshop",
+    "image": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600", 
+    "heading": "Photography Masterclass",
+    "description": "Learn professional photography techniques from experts.",
+    "event_date": "Feb 10, 2026"
   }
 ]

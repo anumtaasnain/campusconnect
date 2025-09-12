@@ -27,7 +27,7 @@
     "upEvents":[
         {
             "id":1,
-            "img":"https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=d3e2c386f6e1d17e4455b4b508b8aaba",
+            "img":"1.avif",
             "date":"July 20-21, 2025 • 10:00 AM",
             "heading":"Annual Hackathon",
             "p":"24-hour coding competition open to all students. Showcase your problem-solving skills.",
@@ -35,7 +35,7 @@
         },
         {
             "id":2,
-            "img":"https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=d3e2c386f6e1d17e4455b4b508b8aaba",
+            "img":"3.avif",
             "date":"August 15-17, 2025 • 6:00 PM",
             "heading":"Annual Cultural Festival",
             "p":"Three days of music, dance, drama and art competitions. Open to all colleges.",
@@ -43,15 +43,32 @@
         },
         {
             "id":3,
-            "img":"https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=d3e2c386f6e1d17e4455b4b508b8aaba",
+            "img":"6.avif",
+             "date":"August 15-17, 2025 • 6:00 PM",
+            "heading":"Inter-College Sports Meet",
+            
+            "p":"Annual sports competition featuring athletics, team games and more..",
+            "category":"Sports"
+        },
+        {
+            "id":4,
+            "img":"5.avif",
             "date":"September 5-7, 2025 • All Day",
             "heading":"Inter-College Sports Meet",
             "p":"Annual sports competition featuring athletics, team games and more..",
             "category":"Sports"
         },
         {
-            "id":3,
-            "img":"https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=d3e2c386f6e1d17e4455b4b508b8aaba",
+            "id":5,
+            "img":"5.avif",
+            "date":"September 5-7, 2025 • All Day",
+            "heading":"Inter-College Sports Meet",
+            "p":"Annual sports competition featuring athletics, team games and more..",
+            "category":"Sports"
+        },
+        {
+            "id":6,
+            "img":"5.avif",
             "date":"September 5-7, 2025 • All Day",
             "heading":"Inter-College Sports Meet",
             "p":"Annual sports competition featuring athletics, team games and more..",

@@ -1,46 +1,35 @@
-import React, { useState } from "react";
-import eventsData from "../Json/events.json"; // apna JSON file ka path sahi rakhna
-import cards from "../Json/home.json";
-import { useEffect } from "react";
-
+import React, { useEffect } from "react";
+import eventsData from "../Json/events.json"; // JSON file
 
 function Events() {
-   useEffect(() => {
-      // Filter functionality for events
-      document.querySelectorAll(".filter-btn").forEach((button) => {
-        button.addEventListener("click", () => {
-          // Remove active class from all buttons
-          document.querySelectorAll(".filter-btn").forEach((btn) => {
-            btn.classList.remove("active");
-          });
-  
-          // Add active class to clicked button
-          button.classList.add("active");
-  
-          const filter = button.getAttribute("data-filter");
-  
-          // Show/hide events based on filter
-          document.querySelectorAll(".event-card").forEach((card) => {
-            if (
-              filter === "all" ||
-              card.getAttribute("data-category") === filter
-            ) {
-              card.style.display = "block";
-            } else {
-              card.style.display = "none";
-            }
-          });
+  useEffect(() => {
+    // Filter functionality for events
+    document.querySelectorAll(".filter-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        // Remove active class from all buttons
+        document.querySelectorAll(".filter-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Add active class to clicked button
+        button.classList.add("active");
+
+        const filter = button.getAttribute("data-filter");
+
+        // Show/hide events based on filter
+        document.querySelectorAll(".event-card").forEach((card) => {
+          if (
+            filter === "all" ||
+            card.getAttribute("data-category").toLowerCase() === filter
+          ) {
+             card.parentElement.classList.remove('d-none');
+          } else {
+            card.parentElement.classList.add('d-none');
+          }
         });
       });
-  
-      // small accessibility helpers
-      document.querySelectorAll(".btn-accent").forEach((b) =>
-        b.addEventListener("keyup", (e) => {
-          if (e.key === "Enter") b.click();
-        })
-      );
-     
     });
+  }, []);
 
   return (
     <div className="events-page">
@@ -55,54 +44,59 @@ function Events() {
         </div>
       </section>
 
-              <div className="container">
-          <div className="row mt-5">
-            <div className="col-12">
-              <h3 className="section-title">Upcoming Events</h3>
-              <div className="filter-buttons">
-                <div className="filter-btn active" data-filter="all">
-                  All Events
-                </div>
-                <div className="filter-btn" data-filter="technical">
-                  Technical
-                </div>
-                <div className="filter-btn" data-filter="cultural">
-                  Cultural
-                </div>
-                <div className="filter-btn" data-filter="sports">
-                  Sports
-                </div>
-                <div className="filter-btn" data-filter="workshop">
-                  Workshops
-                </div>
+      <div className="container">
+        <div className="row mt-5">
+          <div className="col-12">
+            <h3 className="section-title">Upcoming Events</h3>
+
+            {/* FILTER BUTTONS */}
+            <div className="filter-buttons">
+              <div className="filter-btn active" data-filter="all">
+                All Events
               </div>
-              <div className="row">
-                {cards.upEvents.map((upCard) => (
+              <div className="filter-btn" data-filter="technical">
+                Technical
+              </div>
+              <div className="filter-btn" data-filter="cultural">
+                Cultural
+              </div>
+              <div className="filter-btn" data-filter="sports">
+                Sports
+              </div>
+              <div className="filter-btn" data-filter="workshop">
+                Workshops
+              </div>
+            </div>
+
+            {/* EVENTS LIST */}
+            <div className="row">
+              {eventsData.map((event) => (
+                <div
+                  className="col-3"
+                  data-aos="fade-up"
+                  data-aos-delay={100}
+                  key={event.id}
+                  style={{marginBottom:'40px'}}
+                >
                   <div
-                    className="col-3"
-                    data-aos="fade-up"
-                    data-aos-delay={100}
-                    key={upCard.id}
+                    className="event-card"
+                    data-category={event.category.toLowerCase()}
                   >
-                    <div
-                      className="event-card"
-                      data-category={upCard.category.toLowerCase()}
-                    >
-                      <img src={upCard.img} alt="Hackathon" />
-                      <div className="event-card-body">
-                        <div className="event-date">{upCard.date}</div>
-                        <h5>{upCard.heading}</h5>
-                        <p>{upCard.p}</p>
-                        <div className="event-category">{upCard.category}</div>
-                      </div>
+                    <img src={event.image} alt={event.heading} />
+                    <div className="event-card-body">
+                      <div className="event-date">{event.event_date}</div>
+                      <h5>{event.heading}</h5>
+                      <p>{event.description}</p>
+                      <div className="event-category">{event.category}</div>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        </div>
+      </div>
+    </div>
   );
 }
 

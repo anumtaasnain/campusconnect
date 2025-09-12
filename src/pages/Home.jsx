@@ -1,48 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import cards from "../Json/home.json";
 import Events from "./Events";
 import { Link } from "react-router-dom";
+import { useGSAP  } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 function Home() {
-  console.log(cards);
+   const tl = gsap.timeline();
+  const containerRef = useRef();
+  const leftSecRef = useRef();
+  const rightSecRef = useRef();
 
-  useEffect(() => {
-    // Filter functionality for events
-    document.querySelectorAll(".filter-btn").forEach((button) => {
-      button.addEventListener("click", () => {
-        // Remove active class from all buttons
-        document.querySelectorAll(".filter-btn").forEach((btn) => {
-          btn.classList.remove("active");
-        });
+  // ✅ Modal states
+  const [showModal, setShowModal] = useState(true);
+  const [role, setRole] = useState(null);
 
-        // Add active class to clicked button
-        button.classList.add("active");
+  useGSAP(() => {
+    tl.fromTo(leftSecRef.current, { x: -500, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: "power3.out" });
+    gsap.fromTo(rightSecRef.current, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.7)", delay: 0.3 });
 
-        const filter = button.getAttribute("data-filter");
-
-        // Show/hide events based on filter
-        document.querySelectorAll(".event-card").forEach((card) => {
-          if (
-            filter === "all" ||
-            card.getAttribute("data-category") === filter
-          ) {
-            card.style.display = "block";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      });
+    gsap.from(".countdown-container .time-box", {
+      stagger: { duration: 0.3, amount: 1, grid: [1, 1], axis: "y", ease: "circ.inOut", from: "random" },
     });
 
-    // small accessibility helpers
-    document.querySelectorAll(".btn-accent").forEach((b) =>
-      b.addEventListener("keyup", (e) => {
-        if (e.key === "Enter") b.click();
-      })
-    );
-    // ===== Countdown Timer (36 hours left) =====
-    const eventDate = new Date(Date.now() + 36 * 60 * 60 * 1000);
+    gsap.utils.toArray(".event-card").forEach((card, i) => {
+      gsap.fromTo(
+        card,
+        { y: 100, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          delay: i * 0.1,
+        }
+      );
+    });
+  }, { scope: containerRef });
 
+  useEffect(() => {
+    const eventDate = new Date(Date.now() + 36 * 60 * 60 * 1000);
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
@@ -52,23 +55,16 @@ function Home() {
     function updateCountdown() {
       const now = new Date();
       const diff = eventDate - now;
-
       if (diff <= 0) {
         clearInterval(timer);
-        daysEl.textContent =
-          hoursEl.textContent =
-          minutesEl.textContent =
-          secondsEl.textContent =
-            "00";
+        daysEl.textContent = hoursEl.textContent = minutesEl.textContent = secondsEl.textContent = "00";
         statusEl.textContent = "🎉 36 hours have passed!";
         return;
       }
-
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
-
       daysEl.textContent = days.toString().padStart(2, "0");
       hoursEl.textContent = hours.toString().padStart(2, "0");
       minutesEl.textContent = minutes.toString().padStart(2, "0");
@@ -78,10 +74,41 @@ function Home() {
 
     updateCountdown();
     const timer = setInterval(updateCountdown, 1000);
-  });
+    return () => clearInterval(timer);
+  }, []);
 
+  // ✅ Role-wise message
+  const getWelcomeMessage = () => {
+    if (role === "student") return "🎓 Welcome Student! Explore your campus events and opportunities.";
+    if (role === "visitor") return "👋 Welcome Visitor! Discover what’s happening on our campus.";
+    if (role === "staff") return "👨‍🏫 Welcome Staff! Stay updated with college activities and programs.";
+    return "";
+  };
   return (
-    <div>
+    <div ref={containerRef}>
+      {/* ✅ Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            {!role ? (
+              <>
+                <h2>Select Your Role</h2>
+                <div className="role-buttons">
+                  <button onClick={() => setRole("student")}>Student</button>
+                  <button onClick={() => setRole("visitor")}>Visitor</button>
+                  <button onClick={() => setRole("staff")}>Staff</button>
+                </div>
+              </>
+            ) : (
+              <>
+                <h2>{getWelcomeMessage()}</h2>
+                <button className="close-btn" onClick={() => setShowModal(false)}>Continue</button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* IMAGE BANNER SECTION */}
       <section className="img-banner">
         <div className="container-FLUID">
@@ -92,15 +119,12 @@ function Home() {
           />
         </div>
       </section>
+      
       <section className="hero">
         <div className="container">
-          <div className="row g-4 align-items-center">
-            <div className="col-lg-6">
-              <div
-                className="hero-card"
-                data-aos="fade-right"
-                data-aos-duration="900"
-              >
+          <div className="row g-4 align-items-center mainCon">
+            <div className="col-lg-6 leftCon" ref={leftSecRef}>
+              <div className="hero-card">
                 <div>
                   <div className="d-flex justify-content-between align-items-start">
                     <div>
@@ -143,12 +167,7 @@ function Home() {
                 </div>
 
                 <div className="d-flex gap-3 mt-3">
-                  <div
-                    className="mini-card flex-fill"
-                    data-aos="fade-up"
-                    data-aos-duration="900"
-                    data-aos-delay="200"
-                  >
+                  <div className="mini-card flex-fill">
                     <img
                       src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=d3e2c386f6e1d17e4455b4b508b8aaba"
                       alt="Cultural event"
@@ -168,12 +187,7 @@ function Home() {
                     </div>
                   </div>
 
-                  <div
-                    className="mini-card flex-fill"
-                    data-aos="fade-up"
-                    data-aos-duration="900"
-                    data-aos-delay="350"
-                  >
+                  <div className="mini-card flex-fill">
                     <img
                       src="https://images.unsplash.com/photo-1531058020387-3be344556be6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=da22a68a4d69d5bca4e8572dcd3e70d6"
                       alt="Sports event"
@@ -196,13 +210,8 @@ function Home() {
               </div>
             </div>
 
-            <div className="col-lg-6">
-              <div
-                className="hero-card"
-                data-aos="fade-left"
-                data-aos-duration="900"
-                data-aos-delay="200"
-              >
+            <div className="col-lg-6 rightCard" ref={rightSecRef}>
+              <div className="hero-card">
                 <div>
                   <div className="d-flex justify-content-between align-items-start">
                     <div>
@@ -242,12 +251,7 @@ function Home() {
                   </div>
                 </div>
                 <div className="d-flex gap-3 mt-3">
-                  <div
-                    className="mini-card flex-fill"
-                    data-aos="fade-up"
-                    data-aos-duration="900"
-                    data-aos-delay="400"
-                  >
+                  <div className="mini-card flex-fill">
                     <img
                       src="https://images.unsplash.com/photo-1506748686214-e91022986f34?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6c75646519494e7e1d325b6d321b4c3e"
                       alt="Academic Workshop"
@@ -267,12 +271,7 @@ function Home() {
                     </div>
                   </div>
 
-                  <div
-                    className="mini-card flex-fill"
-                    data-aos="fade-up"
-                    data-aos-duration="900"
-                    data-aos-delay="550"
-                  >
+                  <div className="mini-card flex-fill">
                     <img
                       src="https://images.unsplash.com/photo-1549488344-938b8163f910?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6c75646519494e7e1d325b6d321b4c3e"
                       alt="Guest Lecture"
@@ -295,6 +294,7 @@ function Home() {
               </div>
             </div>
           </div>
+          
           <div id="countdown" className="countdown-container">
             <div className="time-box">
               <span className="num" id="days">
@@ -321,6 +321,7 @@ function Home() {
               <span className="label">Seconds</span>
             </div>
           </div>
+          
           <p
             id="eventStatus"
             style={{
@@ -331,6 +332,7 @@ function Home() {
             }}
           ></p>
         </div>
+        
         <div className="container">
           <div className="row mt-5">
             <div className="col-12">
@@ -356,8 +358,6 @@ function Home() {
                 {cards.upEvents.map((upCard) => (
                   <div
                     className="col-3"
-                    data-aos="fade-up"
-                    data-aos-delay={100}
                     key={upCard.id}
                   >
                     <div
@@ -378,6 +378,7 @@ function Home() {
             </div>
           </div>
         </div>
+        
         <div className="row mt-5 m-5 d-flex justify-content-around">
           <div className="col-12 text-center">
             <h3 className="section-title">Events by Category</h3>
@@ -385,8 +386,6 @@ function Home() {
           {cards.events.map((card) => (
             <div
               className="col-md-3 col-6 text-center evByCat"
-              data-aos="fade-up"
-              data-aos-delay={100}
               key={card.id}
             >
               <div className="p-3">
@@ -398,13 +397,17 @@ function Home() {
                 <div className="small" style={{ color: "var(--warm-taupe)" }}>
                   {card.p}
                 </div>
-                <Link to={`/EventDetails/${card.id}`}>
+                <Link
+                  to={`/EventDetails/${card.id}`}
+                  style={{ textDecoration: "none" }}
+                >
                   <button>View More</button>
                 </Link>
               </div>
             </div>
           ))}
         </div>
+        
         <div className="category-container">
           <h2 className="section-title">
             <span style={{ color: "#ff4757" }}>Explore</span>{" "}
@@ -464,6 +467,7 @@ function Home() {
           </div>
         </div>
       </section>
+      
       <section className="container py-5">
         <h2 className="section-title">What People Say</h2>
         <div className="row">
