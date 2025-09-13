@@ -9,7 +9,7 @@ import Gallery from "./pages/Gallery";
 import Footer from "./components/Footer.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
 import Signup from "./pages/Signup";
-import Login from "./pages/login";
+import Login from "./pages/Login.jsx";
 import Contact from "./pages/Contact";
 import Feedback from "./pages/Feedback";
 import Registerevent from "./pages/Registerevent";
