@@ -7,7 +7,7 @@ import About from "./pages/About";
 import Events from "./pages/Events"
 import Gallery from "./pages/Gallery";
 import Footer from "./components/Footer.jsx";
-import EventDetails from "./pages/eventDetails";
+import EventDetails from "./pages/EventDetails.jsx";
 import Signup from "./pages/Signup";
 import Login from "./pages/login";
 import Contact from "./pages/Contact";
@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/EventsCardsDet/:id" element={<EventsCardsDet/>} />
         <Route path="/events" element={<Events />} />
-        <Route  path="/EventDetails/:id" element={<EventDetails />} />
+        <Route  path="/eventeetails/:id" element={<EventDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
          <Route path="/signup" element={<Signup />} />
