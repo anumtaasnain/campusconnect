@@ -4,7 +4,7 @@ import eventData from "../Json/details.json";
 import "../css/tech.css";
 
 const EventDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams('All');
   const event = eventData.find((e) => String(e.id) === String(id));
 
   if (!event) {
@@ -27,7 +27,7 @@ const EventDetails = () => {
       {/* Banner Section */}
       <div className="banner">
         <div className="container" style={{display:"flex" , flexDirection:"column" , justifyContent:'center' ,alignItems:'center' }} >
-          <h1 className="display-3 fw-bold">{event.heading}</h1>
+          <h1 className="display-3 fw-bold" style={{color:"white"}}>{event.heading}</h1>
           <p className="lead">{event.p}</p>
           <a href="#cards-section" className="btn btnBanner btn-custom  mt-3" style={{height:'60px' , width:'250px' , borderRadius:''}} >
             Explore More
@@ -141,7 +141,7 @@ const EventDetails = () => {
       </section>
 
       {/* Training Schedule Section (always visible for sports) */}
-      {event.id === 3 && (
+      {event.tblId === '1' && (
         <section className="py-5">
           <div className="container">
             <h2 className="section-title">Training Schedule</h2>

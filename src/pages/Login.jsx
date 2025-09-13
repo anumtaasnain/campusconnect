@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/login.css";
 
 function Login() {
+  const navigate = useNavigate(); // <-- navigate hook
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -28,8 +30,7 @@ function Login() {
       storedUser.password === loginData.password
     ) {
       alert("✅ Login successful!");
-      // Yahan redirect kar sakte ho, jaise dashboard
-      // window.location.href = "/dashboard";
+      navigate("/"); // <-- home page pe redirect
     } else {
       alert("❌ Invalid email or password!");
     }
@@ -83,9 +84,7 @@ function Login() {
                 <input type="checkbox" id="remember" name="remember" />
                 <label htmlFor="remember">Remember me</label>
               </div>
-              <a href="#" className="forgot-password">
-                Forgot password?
-              </a>
+               
             </div>
 
             <button type="submit" className="btn">

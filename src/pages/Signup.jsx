@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/signup.css";
 
-function Home() {
+function Signup() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -29,12 +32,15 @@ function Home() {
       return;
     }
 
-    // Save data to localStorage (single user)
+    // Save data to localStorage
     localStorage.setItem("user", JSON.stringify(formData));
 
-    alert("Account created successfully! Data saved in localStorage ✅");
+    alert("Account created successfully! Redirecting to login page...");
 
-    // Reset form
+    // Redirect to login page
+    navigate("/login");
+
+    // Reset form (optional)
     setFormData({
       firstName: "",
       lastName: "",
@@ -56,19 +62,6 @@ function Home() {
             Create an account to access exclusive features, personalized
             content, and connect with like-minded individuals.
           </p>
-          <div className="artwork">
-            <div>
-              <div className="circle"></div>
-              <div className="rectangle"></div>
-            </div>
-            <div>
-              <div
-                className="circle"
-                style={{ width: "40px", height: "40px", marginTop: "10px" }}
-              ></div>
-              <div className="rectangle" style={{ width: "80px" }}></div>
-            </div>
-          </div>
         </div>
 
         {/* Right Panel */}
@@ -78,7 +71,7 @@ function Home() {
             <p>Fill in your details to get started</p>
           </div>
 
-          <form id="registrationForm" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className="name-fields">
               <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
@@ -198,4 +191,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Signup;

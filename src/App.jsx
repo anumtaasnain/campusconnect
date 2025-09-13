@@ -6,14 +6,15 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Events from "./pages/Events"
 import Gallery from "./pages/Gallery";
-import Footer from "./components/Footer.Jsx";
+import Footer from "./components/Footer.jsx";
 import EventDetails from "./pages/eventDetails";
 import Signup from "./pages/Signup";
 import Login from "./pages/login";
 import Contact from "./pages/Contact";
 import Feedback from "./pages/Feedback";
 import Registerevent from "./pages/Registerevent";
-
+import CalendarPage from "./pages/CalendarPage.jsx";
+import EventsCardsDet from "./pages/EventsCardsDet.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/EventsCardsDet/:id" element={<EventsCardsDet/>} />
         <Route path="/events" element={<Events />} />
         <Route  path="/EventDetails/:id" element={<EventDetails />} />
         <Route path="/about" element={<About />} />
@@ -30,6 +32,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/register" element={<Registerevent />} />
+        <Route path="/calendar" element={<CalendarPage />} />
       </Routes>
       <Footer />
     </>

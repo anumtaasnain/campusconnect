@@ -76,7 +76,7 @@ function Events() {
                   data-aos="fade-up"
                   data-aos-delay={100}
                   key={event.id}
-                  style={{marginBottom:'40px'}}
+                  style={{margin:'10px'}}
                 >
                   <div
                     className="event-card"

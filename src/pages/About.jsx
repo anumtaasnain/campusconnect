@@ -22,6 +22,8 @@ function Home() {
                 <h1 className="hero-title">About CampusConnect</h1>
                 <p className="hero-subtitle">
                   Connecting students, faculty, and the entire campus community
+                  through memorable events and experiences.Connecting students, faculty, and the entire campus community
+                  through memorable events and experiences.Connecting students, faculty, and the entire campus community
                   through memorable events and experiences.
                 </p>
                 <a href="#our-story" className="  btn-accent me-3">
@@ -30,11 +32,18 @@ function Home() {
                  
               </div>
               <div className="col-lg-6 d-none d-lg-block">
-                <img
-                  src="./a.jpg"
-                  alt="College campus"
-                  className="img-fluid  rounded shadow"
-                />
+                <video
+                  className="category-media"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source
+                    src="./l.mp4"
+                    type="video/mp4"
+                  />
+                </video>
                 
                 </div>
 

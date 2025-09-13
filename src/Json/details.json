@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "tblId":1,
     "heading": "Technical Skills",
     "p": "Showcasing expertise in modern technologies and development practices",
     "heading2": "Technical Expertise",
@@ -41,6 +42,7 @@
   },
   {
     "id": 2,
+    "tblId":1,
     "heading": "Cultural Days",
     "p": "Celebrating campus culture through events and performances",
     "heading2": "Cultural Expertise",
@@ -81,6 +83,7 @@
   },
   {
     "id": 3,
+    "tblId":1,
     "heading": "Sports Events",
     "p": "Showcasing athletic abilities and sports achievements",
     "heading2": "Sports Expertise",
@@ -121,6 +124,7 @@
   },
   {
     "id": 4,
+    "tblId":1,
     "heading": "Departmental Events",
     "p": "Organizing academic and departmental programs",
     "heading2": "Departmental Expertise",

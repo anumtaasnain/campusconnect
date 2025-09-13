@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import cards from "../Json/home.json";
 import Events from "./Events";
 import { Link } from "react-router-dom";
-import { useGSAP  } from "@gsap/react";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 function Home() {
-   const tl = gsap.timeline();
+  const tl = gsap.timeline();
   const containerRef = useRef();
   const leftSecRef = useRef();
   const rightSecRef = useRef();
@@ -17,32 +17,50 @@ function Home() {
   const [showModal, setShowModal] = useState(true);
   const [role, setRole] = useState(null);
 
-  useGSAP(() => {
-    tl.fromTo(leftSecRef.current, { x: -500, opacity: 0 }, { x: 0, opacity: 1, duration: 1, ease: "power3.out" });
-    gsap.fromTo(rightSecRef.current, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.7)", delay: 0.3 });
-
-    gsap.from(".countdown-container .time-box", {
-      stagger: { duration: 0.3, amount: 1, grid: [1, 1], axis: "y", ease: "circ.inOut", from: "random" },
-    });
-
-    gsap.utils.toArray(".event-card").forEach((card, i) => {
-      gsap.fromTo(
-        card,
-        { y: 100, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-          delay: i * 0.1,
-        }
+  useGSAP(
+    () => {
+      tl.fromTo(
+        leftSecRef.current,
+        { x: -500, opacity: 0 },
+        { x: 0, opacity: 1, duration: 1, ease: "power3.out" }
       );
-    });
-  }, { scope: containerRef });
+      gsap.fromTo(
+        rightSecRef.current,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.7)", delay: 0.3 }
+      );
+
+      gsap.from(".countdown-container .time-box", {
+        stagger: {
+          duration: 0.3,
+          amount: 1,
+          grid: [1, 1],
+          axis: "y",
+          ease: "circ.inOut",
+          from: "random",
+        },
+      });
+
+      gsap.utils.toArray(".event-card").forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { y: 100, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+            delay: i * 0.1,
+          }
+        );
+      });
+    },
+    { scope: containerRef }
+  );
 
   useEffect(() => {
     const eventDate = new Date(Date.now() + 36 * 60 * 60 * 1000);
@@ -57,7 +75,11 @@ function Home() {
       const diff = eventDate - now;
       if (diff <= 0) {
         clearInterval(timer);
-        daysEl.textContent = hoursEl.textContent = minutesEl.textContent = secondsEl.textContent = "00";
+        daysEl.textContent =
+          hoursEl.textContent =
+          minutesEl.textContent =
+          secondsEl.textContent =
+            "00";
         statusEl.textContent = "🎉 36 hours have passed!";
         return;
       }
@@ -79,11 +101,22 @@ function Home() {
 
   // ✅ Role-wise message
   const getWelcomeMessage = () => {
-    if (role === "student") return "🎓 Welcome Student! Explore your campus events and opportunities.";
-    if (role === "visitor") return "👋 Welcome Visitor! Discover what’s happening on our campus.";
-    if (role === "staff") return "👨‍🏫 Welcome Staff! Stay updated with college activities and programs.";
+    if (role === "student")
+      return "🎓 Welcome Student! Explore your campus events and opportunities.";
+    if (role === "visitor")
+      return "👋 Welcome Visitor! Discover what’s happening on our campus.";
+    if (role === "staff")
+      return "👨‍🏫 Welcome Staff! Stay updated with college activities and programs.";
     return "";
   };
+
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredData =
+    selectedCategory === "All"
+      ? cards.upEvents
+      : cards.upEvents.filter((e) => e.category === selectedCategory);
+
   return (
     <div ref={containerRef}>
       {/* ✅ Modal */}
@@ -102,7 +135,12 @@ function Home() {
             ) : (
               <>
                 <h2>{getWelcomeMessage()}</h2>
-                <button className="close-btn" onClick={() => setShowModal(false)}>Continue</button>
+                <button
+                  className="close-btn"
+                  onClick={() => setShowModal(false)}
+                >
+                  Continue
+                </button>
               </>
             )}
           </div>
@@ -119,7 +157,7 @@ function Home() {
           />
         </div>
       </section>
-      
+
       <section className="hero">
         <div className="container">
           <div className="row g-4 align-items-center mainCon">
@@ -294,7 +332,7 @@ function Home() {
               </div>
             </div>
           </div>
-          
+
           <div id="countdown" className="countdown-container">
             <div className="time-box">
               <span className="num" id="days">
@@ -321,7 +359,7 @@ function Home() {
               <span className="label">Seconds</span>
             </div>
           </div>
-          
+
           <p
             id="eventStatus"
             style={{
@@ -332,44 +370,104 @@ function Home() {
             }}
           ></p>
         </div>
-        
+
         <div className="container">
           <div className="row mt-5">
             <div className="col-12">
               <h3 className="section-title">Upcoming Events</h3>
               <div className="filter-buttons">
-                <div className="filter-btn active" data-filter="all">
+                <div
+                  className="filter-btn active"
+                  data-filter="all"
+                  onClick={() => setSelectedCategory("All")}
+                >
                   All Events
                 </div>
-                <div className="filter-btn" data-filter="technical">
+                <div
+                  className="filter-btn"
+                  data-filter="technical"
+                  onClick={() => setSelectedCategory("Technical")}
+                >
                   Technical
                 </div>
-                <div className="filter-btn" data-filter="cultural">
+                <div
+                  className="filter-btn"
+                  data-filter="cultural"
+                  onClick={() => setSelectedCategory("Cultural")}
+                >
                   Cultural
                 </div>
-                <div className="filter-btn" data-filter="sports">
+                <div
+                  className="filter-btn"
+                  data-filter="sports"
+                  onClick={() => setSelectedCategory("Sports")}
+                >
                   Sports
                 </div>
-                <div className="filter-btn" data-filter="workshop">
+                <div
+                  className="filter-btn"
+                  data-filter="workshop"
+                  onClick={() => setSelectedCategory("Workshops")}
+                >
                   Workshops
                 </div>
               </div>
               <div className="row">
-                {cards.upEvents.map((upCard) => (
+                {filteredData.map((upCard) => (
                   <div
                     className="col-3"
                     key={upCard.id}
+                    style={{ marginBottom: "20px" }}
                   >
                     <div
                       className="event-card"
                       data-category={upCard.category.toLowerCase()}
                     >
+                      <div className="event-category" style={{position:"absolute" , left:"220px" , color:"white"}}>{upCard.category}</div>
                       <img src={upCard.img} alt="Hackathon" />
                       <div className="event-card-body">
                         <div className="event-date">{upCard.date}</div>
                         <h5>{upCard.heading}</h5>
                         <p>{upCard.p}</p>
-                        <div className="event-category">{upCard.category}</div>
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: "8px",
+                            marginTop: "8px",
+                          }}
+                        >
+                          <Link to={`/EventsCardsDet/${upCard.id}`}>
+                          <button
+                            
+                            style={{
+                              padding: "6px 20px",
+                              borderRadius: "20px",
+                              border: "1px solid brown",
+                              backgroundColor: "white",
+                              color: "white",
+                              fontSize: "12px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Details
+                          </button>
+                          </Link>
+                          <Link>
+                          <button
+                            style={{
+                              padding: "6px 20px",
+                              borderRadius: "20px",
+                              border: "1px solid brown",
+                              backgroundColor: "white",
+                              color: "white",
+                              fontSize: "12px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Register
+                          </button>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -378,16 +476,13 @@ function Home() {
             </div>
           </div>
         </div>
-        
+
         <div className="row mt-5 m-5 d-flex justify-content-around">
           <div className="col-12 text-center">
             <h3 className="section-title">Events by Category</h3>
           </div>
           {cards.events.map((card) => (
-            <div
-              className="col-md-3 col-6 text-center evByCat"
-              key={card.id}
-            >
+            <div className="col-md-3 col-6 text-center evByCat" key={card.id}>
               <div className="p-3">
                 <i
                   className="bi bi-cpu-fill"
@@ -407,7 +502,7 @@ function Home() {
             </div>
           ))}
         </div>
-        
+
         <div className="category-container">
           <h2 className="section-title">
             <span style={{ color: "#ff4757" }}>Explore</span>{" "}
@@ -416,10 +511,7 @@ function Home() {
           <div className="category-grid">
             <div className="left category-item">
               <video className="category-media" autoPlay loop muted playsInline>
-                <source
-                  src="https://assets.mixkit.co/videos/preview/mixkit-business-meeting-in-a-modern-office-44659-large.mp4"
-                  type="video/mp4"
-                />
+                <source src="./u.mp4" type="video/mp4" />
               </video>
               <div className="overlay">
                 <h2 className="category-name">Upcoming Events</h2>
@@ -435,10 +527,7 @@ function Home() {
                   muted
                   playsInline
                 >
-                  <source
-                    src="https://assets.mixkit.co/videos/preview/mixkit-young-women-dancing-at-a-music-festival-50150-large.mp4"
-                    type="video/mp4"
-                  />
+                  <source src="./p.mp4" type="video/mp4" />
                 </video>
                 <div className="overlay">
                   <h2 className="category-name">Recent Event</h2>
@@ -453,10 +542,7 @@ function Home() {
                   muted
                   playsInline
                 >
-                  <source
-                    src="https://assets.mixkit.co/videos/preview/mixkit-students-walking-in-a-university-40556-large.mp4"
-                    type="video/mp4"
-                  />
+                  <source src="./l.m" type="video/mp4" />
                 </video>
                 <div className="overlay">
                   <h2 className="category-name">Previous Events</h2>
@@ -467,7 +553,7 @@ function Home() {
           </div>
         </div>
       </section>
-      
+
       <section className="container py-5">
         <h2 className="section-title">What People Say</h2>
         <div className="row">
