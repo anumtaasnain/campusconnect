@@ -6,16 +6,16 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+import eventsData from "../Json/EventsCards.json";
 
-function Home() {
+
+function Home({  selectedRole }) {
   const tl = gsap.timeline();
   const containerRef = useRef();
   const leftSecRef = useRef();
   const rightSecRef = useRef();
 
-  // ✅ Modal states
-  const [showModal, setShowModal] = useState(true);
-  const [role, setRole] = useState(null);
+
 
   useGSAP(
     () => {
@@ -24,13 +24,13 @@ function Home() {
         { x: -500, opacity: 0 },
         { x: 0, opacity: 1, duration: 1, ease: "power3.out" }
       );
-      gsap.fromTo(
+      tl.fromTo(
         rightSecRef.current,
         { scale: 0, opacity: 0 },
         { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.7)", delay: 0.3 }
       );
 
-      gsap.from(".countdown-container .time-box", {
+      tl.from(".countdown-container .time-box", {
         stagger: {
           duration: 0.3,
           amount: 1,
@@ -99,53 +99,39 @@ function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  // ✅ Role-wise message
-  const getWelcomeMessage = () => {
-    if (role === "student")
-      return "🎓 Welcome Student! Explore your campus events and opportunities.";
-    if (role === "visitor")
-      return "👋 Welcome Visitor! Discover what’s happening on our campus.";
-    if (role === "staff")
-      return "👨‍🏫 Welcome Staff! Stay updated with college activities and programs.";
-    return "";
-  };
+  
+  
 
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredData =
-    selectedCategory === "All"
-      ? cards.upEvents
-      : cards.upEvents.filter((e) => e.category === selectedCategory);
+  selectedCategory === "All"
+    ? eventsData
+    : eventsData.filter((e) => e.category === selectedCategory);
+ // yaha role ka message show karenge
+  const getWelcomeMessage = () => {
+    if (selectedRole === "student")
+      return "🎓 Welcome Student! Explore your campus events and opportunities.";
+    if (selectedRole === "visitor")
+      return "👋 Welcome Visitor! Discover what’s happening on our campus.";
+    if (selectedRole === "staff")
+      return "👨‍🏫 Welcome Staff! Stay updated with college activities and programs.";
+    return "";
+  };
 
   return (
     <div ref={containerRef}>
-      {/* ✅ Modal */}
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            {!role ? (
-              <>
-                <h2>Select Your Role</h2>
-                <div className="role-buttons">
-                  <button onClick={() => setRole("student")}>Student</button>
-                  <button onClick={() => setRole("visitor")}>Visitor</button>
-                  <button onClick={() => setRole("staff")}>Staff</button>
-                </div>
-              </>
-            ) : (
-              <>
-                <h2>{getWelcomeMessage()}</h2>
-                <button
-                  className="close-btn"
-                  onClick={() => setShowModal(false)}
-                >
-                  Continue
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
+      <p
+        style={{
+          textAlign: "center",
+          fontSize: "18px",
+          fontWeight: "bold",
+          margin: "10px 0",
+          color: "#8B4513",
+        }}
+      >
+        {getWelcomeMessage()}
+      </p>
 
       {/* IMAGE BANNER SECTION */}
       <section className="img-banner">
@@ -375,103 +361,180 @@ function Home() {
           <div className="row mt-5">
             <div className="col-12">
               <h3 className="section-title">Upcoming Events</h3>
-              <div className="filter-buttons">
-                <div
-                  className="filter-btn active"
-                  data-filter="all"
-                  onClick={() => setSelectedCategory("All")}
-                >
-                  All Events
-                </div>
-                <div
-                  className="filter-btn"
-                  data-filter="technical"
-                  onClick={() => setSelectedCategory("Technical")}
-                >
-                  Technical
-                </div>
-                <div
-                  className="filter-btn"
-                  data-filter="cultural"
-                  onClick={() => setSelectedCategory("Cultural")}
-                >
-                  Cultural
-                </div>
-                <div
-                  className="filter-btn"
-                  data-filter="sports"
-                  onClick={() => setSelectedCategory("Sports")}
-                >
-                  Sports
-                </div>
-                <div
-                  className="filter-btn"
-                  data-filter="workshop"
-                  onClick={() => setSelectedCategory("Workshops")}
-                >
-                  Workshops
-                </div>
-              </div>
-              <div className="row">
+              <div className="filter-buttons" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "20px", justifyContent: "center" , borderRadius:"10px" }}>
+  {["All", "Technical", "Cultural", "Sports", "Academic", "Workshop"].map((category) => (
+    <div
+      key={category}
+      onClick={() => setSelectedCategory(category === "All" ? "All" : category)}
+      style={{
+        padding: "8px 18px",
+        borderRadius: "10px",
+        border: selectedCategory === category ? "2px solid #8B4513" : "1px solid #ccc",
+        backgroundColor: selectedCategory === category ? "#8B4513" : "#fff",
+        color: selectedCategory === category ? "#fff" : "#333",
+        cursor: "pointer",
+        fontSize: "14px",
+        fontWeight: "500",
+        transition: "all 0.2s ease-in-out",
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = selectedCategory === category ? "#5c3010" : "#f3f3f3")}
+      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = selectedCategory === category ? "#8B4513" : "#fff")}
+    >
+      {category} Events
+    </div>
+  ))}
+</div><div className="row">
                 {filteredData.map((upCard) => (
-                  <div
-                    className="col-3"
-                    key={upCard.id}
-                    style={{ marginBottom: "20px" }}
-                  >
-                    <div
-                      className="event-card"
-                      data-category={upCard.category.toLowerCase()}
-                    >
-                      <div className="event-category" style={{position:"absolute" , left:"220px" , color:"white"}}>{upCard.category}</div>
-                      <img src={upCard.img} alt="Hackathon" />
-                      <div className="event-card-body">
-                        <div className="event-date">{upCard.date}</div>
-                        <h5>{upCard.heading}</h5>
-                        <p>{upCard.p}</p>
-                        <div
-                          style={{
-                            display: "flex",
-                            gap: "8px",
-                            marginTop: "8px",
-                          }}
-                        >
-                          <Link to={`/EventsCardsDet/${upCard.id}`}>
-                          <button
-                            
-                            style={{
-                              padding: "6px 20px",
-                              borderRadius: "20px",
-                              border: "1px solid brown",
-                              backgroundColor: "white",
-                              color: "white",
-                              fontSize: "12px",
-                              cursor: "pointer",
-                            }}
-                          >
-                            Details
-                          </button>
-                          </Link>
-                          <Link>
-                          <button
-                            style={{
-                              padding: "6px 20px",
-                              borderRadius: "20px",
-                              border: "1px solid brown",
-                              backgroundColor: "white",
-                              color: "white",
-                              fontSize: "12px",
-                              cursor: "pointer",
-                            }}
-                          >
-                            Register
-                          </button>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+  <div
+    className="col-3"
+    key={upCard.id}
+    style={{ marginBottom: "20px" }}
+  >
+    <div
+      className="event-card"
+      data-category={upCard.category?.toLowerCase()}
+      style={{
+        position: "relative",
+        borderRadius: "15px",
+        overflow: "hidden",
+        boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+        background: "white",
+        transition: "transform 0.3s ease"
+      }}
+    >
+      <div 
+        className="event-category" 
+        style={{
+          position: "absolute", 
+          top: "10px",
+          right: "10px",
+          backgroundColor: "rgba(139, 69, 19, 0.9)",
+          color: "white",
+          padding: "4px 12px",
+          borderRadius: "20px",
+          fontSize: "12px",
+          fontWeight: "500",
+          zIndex: 2
+        }}
+      >
+        {upCard.cat || "General"}
+      </div>
+      
+      <img 
+        src={upCard.img || "default-image.jpg"} 
+        alt={upCard.heading}
+        style={{
+          width: "100%",
+          height: "200px",
+          objectFit: "cover"
+        }}
+      />
+      
+      <div 
+        className="event-card-body"
+        style={{
+          padding: "20px"
+        }}
+      >
+        <div 
+          className="event-date"
+          style={{
+            color: "#8B4513",
+            fontSize: "14px",
+            fontWeight: "600",
+            marginBottom: "8px"
+          }}
+        >
+          {upCard.date || "TBA"}
+        </div>
+        
+        <h5 style={{
+          fontSize: "18px",
+          fontWeight: "700",
+          color: "#333",
+          marginBottom: "10px",
+          lineHeight: "1.3"
+        }}>
+          {upCard.heading}
+        </h5>
+        
+        <p style={{
+          color: "#666",
+          fontSize: "14px",
+          lineHeight: "1.5",
+          marginBottom: "15px",
+          height: "60px",
+          overflow: "hidden",
+          display: "-webkit-box",
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: "vertical"
+        }}>
+          {upCard.desc || upCard.p}
+        </p>
+        
+        <div
+          style={{
+            display: "flex",
+            gap: "8px",
+            marginTop: "15px",
+          }}
+        >
+          <Link to={`/EventsCardsDet/${upCard.id}`}>
+            <button
+              style={{
+                padding: "8px 20px",
+                borderRadius: "10px",
+                border: "2px solid #8B4513",
+                backgroundColor: "#8B4513",
+                color: "white",
+                fontSize: "12px",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "all 0.3s ease"
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "white";
+                e.target.style.color = "#8B4513";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = "#8B4513";
+                e.target.style.color = "white";
+              }}
+            >
+              Details
+            </button>
+          </Link>
+          
+          <Link to={'/register'}>
+            <button
+              style={{
+                padding: "8px 20px",
+                borderRadius: "10px",
+                border: "2px solid #8B4513",
+                backgroundColor: "white",
+                color: "white",
+                fontSize: "12px",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "all 0.3s ease"
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.backgroundColor = "#8B4513";
+                e.target.style.color = "white";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.backgroundColor = "white";
+                e.target.style.color = "#8B4513";
+              }}
+            >
+              Register
+            </button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+))}
               </div>
             </div>
           </div>
@@ -482,7 +545,7 @@ function Home() {
             <h3 className="section-title">Events by Category</h3>
           </div>
           {cards.events.map((card) => (
-            <div className="col-md-3 col-6 text-center evByCat" key={card.id}>
+            <div className="col-md-3 col-6 text-center evByCat" key={card.id} >
               <div className="p-3">
                 <i
                   className="bi bi-cpu-fill"
@@ -505,11 +568,11 @@ function Home() {
 
         <div className="category-container">
           <h2 className="section-title">
-            <span style={{ color: "#ff4757" }}>Explore</span>{" "}
+            <span style={{ color: "var(--text-primary)" }}>Explore</span>{" "}
             <span style={{ color: "var(--text-primary)" }}>Categories</span>
           </h2>
           <div className="category-grid">
-            <div className="left category-item">
+            <div className="left category-item"   >
               <video className="category-media" autoPlay loop muted playsInline>
                 <source src="./u.mp4" type="video/mp4" />
               </video>
@@ -519,7 +582,7 @@ function Home() {
               </div>
             </div>
             <div className="right">
-              <div className="category-item right-top">
+              <div className="category-item right-top" ref={rightSecRef}>
                 <video
                   className="category-media"
                   autoPlay
@@ -534,7 +597,7 @@ function Home() {
                   <button className="shop-btn">Explore Now</button>
                 </div>
               </div>
-              <div className="category-item right-bottom">
+              <div className="category-item right-bottom ">
                 <video
                   className="category-media"
                   autoPlay

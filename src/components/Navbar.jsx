@@ -21,7 +21,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container-xl">
-        <a className="navbar-brand brand" href="#">CampusConnect</a>
+        <a className="navbar-brand brand" href="">CampusConnect</a>
         <button
           className="navbar-toggler"
           type="button"
@@ -89,7 +89,7 @@ function Navbar() {
     {userName ? (
       <>
         <li className="nav-item ms-3">
-          <span className="text-light btn-sm btnNav">
+          <span className="text-dark btn-sm btnNav">
             <i className="bi bi-person me-1" /> {userName}
           </span>
         </li>
@@ -107,7 +107,7 @@ function Navbar() {
         <NavLink
           to="/signup"
           className={({ isActive }) =>
-            "btn btn-outline-accent btn-sm btnNav" + (isActive ? " active" : "")
+            "btn btn-outline-accent btnNav" + (isActive ? " active" : "")
           }
         >
           <i className="bi bi-person me-1" /> Signup

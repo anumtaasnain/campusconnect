@@ -2,6 +2,8 @@
     {
         "id": 1,
         "heading": "The Innovation Marathon",
+        "img":"/1.avif",
+        "cat":"Technical",
         "subtitle": "Annual Hackathon - Where Ideas Transform Reality",
         "desc": "Where creativity, coding, and collaboration converge to build tomorrow's solutions in record time",
         "heading2": "The Global Phenomenon",
@@ -202,9 +204,11 @@
             ]
         }
     },
-    {
+    {   
         "id": 2,
         "heading": "The Vibrant Celebration",
+        "cat":"Cultural",
+        "img":"/2.avif",
         "subtitle": "Annual Cultural Festival - Celebrating Diversity and Heritage",
         "desc": "Where traditions, arts, and communities unite in a spectacular showcase of human creativity and cultural richness",
         "heading2": "The Global Cultural Phenomenon",
@@ -440,6 +444,94 @@
                 "Future participation commitments"
             ]
         }
+    },
+    {   
+        "id": 3,
+        "heading": "Inter COllege Sports Meet",
+        "cat":"Sports",
+        "img":"/football.jpg",
+        "subtitle": "Annual Cultural Festival - Celebrating Diversity and Heritage",
+        "desc": "Where traditions, arts, and communities unite in a spectacular showcase of human creativity and cultural richness",
+        "heading2": "The Global Cultural Phenomenon",
+        "p1": "Cultural festivals serve as vital bridges connecting communities, preserving traditions, and celebrating the rich tapestry of human heritage. These events bring together people from diverse backgrounds to share their customs, arts, cuisine, and stories in a vibrant celebration of unity in diversity.",
+        "p2": "The beauty of cultural festivals lies in their ability to transcend boundaries—linguistic, religious, and social—creating spaces where understanding flourishes and relationships are built through shared experiences of music, dance, food, and storytelling.",
+        "heading3": "Cultural Festival By The Numbers",
+        "numbersData": [
+            {
+                "icon": "📍",
+                "number": "10,000+",
+                "title": "Festivals Worldwide",
+                "description": "Annual cultural celebrations across the globe"
+            },
+            {
+                "icon": "👥",
+                "number": "500M+",
+                "title": "Festival Participants", 
+                "description": "People actively participating in cultural festivals annually"
+            },
+            {
+                "icon": "🎭",
+                "number": "195",
+                "title": "Countries Hosting",
+                "description": "Nations with major cultural festival traditions"
+            },
+            {
+                "icon": "👁️",
+                "number": "2.5B",
+                "title": "Global Audience",
+                "description": "Viewers engaging with cultural festivals through various media"
+            },
+            {
+                "icon": "📅",
+                "number": "5,000+",
+                "title": "Years of History",
+                "description": "Documented history of cultural celebrations"
+            }
+        ]
+    },
+    {   
+        "id": 4,
+        "heading": "React Workshops",
+        "cat":"Sports",
+        "img":"/8.avif",
+        "subtitle": "Annual Cultural Festival - Celebrating Diversity and Heritage",
+        "desc": "Where traditions, arts, and communities unite in a spectacular showcase of human creativity and cultural richness",
+        "heading2": "The Global Cultural Phenomenon",
+        "p1": "Cultural festivals serve as vital bridges connecting communities, preserving traditions, and celebrating the rich tapestry of human heritage. These events bring together people from diverse backgrounds to share their customs, arts, cuisine, and stories in a vibrant celebration of unity in diversity.",
+        "p2": "The beauty of cultural festivals lies in their ability to transcend boundaries—linguistic, religious, and social—creating spaces where understanding flourishes and relationships are built through shared experiences of music, dance, food, and storytelling.",
+        "heading3": "Cultural Festival By The Numbers",
+        "numbersData": [
+            {
+                "icon": "📍",
+                "number": "10,000+",
+                "title": "Festivals Worldwide",
+                "description": "Annual cultural celebrations across the globe"
+            },
+            {
+                "icon": "👥",
+                "number": "500M+",
+                "title": "Festival Participants", 
+                "description": "People actively participating in cultural festivals annually"
+            },
+            {
+                "icon": "🎭",
+                "number": "195",
+                "title": "Countries Hosting",
+                "description": "Nations with major cultural festival traditions"
+            },
+            {
+                "icon": "👁️",
+                "number": "2.5B",
+                "title": "Global Audience",
+                "description": "Viewers engaging with cultural festivals through various media"
+            },
+            {
+                "icon": "📅",
+                "number": "5,000+",
+                "title": "Years of History",
+                "description": "Documented history of cultural celebrations"
+            }
+        ]
     }
     ]
 

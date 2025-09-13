@@ -27,7 +27,7 @@ export default function EventRegistration() {
 
           <p>Hello {user.firstName}, please fill in your details below:</p>
 
-          <form>
+          <form action={'/'}>
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="firstName" className="required">

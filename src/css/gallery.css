@@ -29,12 +29,12 @@
 .filter-buttons {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-bottom: 2rem;
   gap: 10px;
 }
 .filter-btn {
-  padding: 8px 16px;
+  padding: 4px 5px;
   border: 2px solid #ccc;
   border-radius: 6px;
   background: transparent;
@@ -103,4 +103,49 @@
   background: #f3f4f6;
   color: #555;
   border: 1px solid #ddd;
+}
+
+ 
+
+ 
+
+.bookmark-btn:hover {
+  background: #ffdf7e;
+}
+
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #f9f9f9;
+}
+
+.card-info-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 4px;
+}
+
+.bookmark-icon-bottom {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  /* font-size: 1rem; */
+  padding: 6px;
+  transition: all 0.3s ease;
+  width: 60px !important;
+}
+
+.bookmark-icon-bottom.active {
+  background: gold;
+  border-color: gold;
+}
+
+.bookmark-icon-bottom:hover {
+  background: #ffd966;
 }

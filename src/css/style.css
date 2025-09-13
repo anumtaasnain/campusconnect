@@ -30,8 +30,9 @@ body {
   color: var(--dark-chocolate) !important;
 }
 
+
 .nav-link {
- color: black;
+ color: white;
   font-weight: 500;
 }
 
@@ -41,10 +42,10 @@ body {
 }
 
 .btnNav{
-  width: 130px !important;
+  width: 100px !important;
   padding: 0;
   margin: 0 !important;
-  height: 50px;
+  height: 60px;
   text-align: center;
   display: flex;
   align-items: center !important;
@@ -81,7 +82,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-  border: 1px solid var(--soft-stone);
+
 }
 
 .hero-card .title {
@@ -201,7 +202,7 @@ body {
   font-weight: 800;
   color: var(--dark-chocolate);
   text-align: center;
-  position: relative;
+  color: brown;
 }
 
 .section-title:after {
@@ -326,6 +327,11 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 /* Event card styles */
+
+.event-card{
+  max-width: 100%;
+}
+
 /* Hidden state for filtered-out cards */
 .event-card.hidden {
   opacity: 0;
@@ -465,13 +471,14 @@ body {
   gap: 1rem;
   margin: 2rem 0 3rem;
   flex-wrap: wrap;
+  border-radius: 10px;
 }
 
 .filter-btn {
   background: white;
   border: 1px solid var(--soft-stone);
   padding: 0.6rem 1.5rem;
-  border-radius: 25px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.2s;
   color: var(--warm-taupe);
@@ -566,22 +573,7 @@ body {
   padding: 5rem 0;
 }
 
-.section-title {
-  font-weight: 800;
-  margin-bottom: 3rem;
-  color: var(--dark-chocolate);
-  position: relative;
-  text-align: center;
-}
 
-.section-title:after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--earthy-brown);
-  margin: 15px auto;
-}
 
 .subsection-title {
   font-weight: 700;
@@ -843,6 +835,7 @@ body {
   transition: 0.2s;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  
 
 }
 
@@ -939,8 +932,8 @@ body {
         }
 
         .shop-btn {
-            background: rgba(255,255,255,0.9);
-            color: black;
+            background: #5f3a22;
+            color: white;
             border: none;
             padding: 8px 20px;
             font-size: 0.9rem;
@@ -1079,8 +1072,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   height: 100%;
-    border-bottom: 5px solid #8b4513;
-    border-right: 5px solid #8b4513;
+
 
 }
 
