@@ -26,10 +26,23 @@ function Home() {
                   through memorable events and experiences.Connecting students, faculty, and the entire campus community
                   through memorable events and experiences.
                 </p>
-                <a href="#our-story" className="  btn-accent me-3">
-                  Our Story
-                </a>
-                 
+                <button
+                  style={{
+                    padding: "10px 20px",
+                    backgroundColor: "#8B4513", // Brown coffee color
+                    color: "white",
+                    border: "none",
+                    borderRadius: "8px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  Our History
+                </button>
+
+
               </div>
               <div className="col-lg-6 d-none d-lg-block">
                 <video
@@ -44,13 +57,13 @@ function Home() {
                     type="video/mp4"
                   />
                 </video>
-                
-                </div>
-
 
               </div>
+
+
             </div>
-          
+          </div>
+
         </section>
 
         <section className="content-section" id="our-story">
@@ -87,7 +100,18 @@ function Home() {
                   organize, promote, and manage hundreds of events each year.
                 </p>
                 <div className="mt-4">
-                  <a href="#" className="  btn-accent">
+                  <a href="#" style={{
+                    padding: "10px 20px",
+                    backgroundColor: "#8B4513", // Brown coffee color
+                    color: "white",
+                    border: "none",
+                    borderRadius: "8px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                  >
                     Learn More About Our Journey
                   </a>
                 </div>
@@ -336,7 +360,18 @@ function Home() {
               </div>
             </div>
             <div className="text-center ">
-              <a href="#" className="btn-lg btn-accent">
+              <a href="#" style={{
+                padding: "10px 20px",
+                backgroundColor: "#8B4513", // Brown coffee color
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                fontSize: "14px",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+              }}
+              >
                 View Full Team
               </a>
             </div>
@@ -354,13 +389,46 @@ function Home() {
                   your activities, CampusConnect is here to help.
                 </p>
                 <div className="d-flex flex-wrap justify-content-center gap-3">
-                  <a href="/signup" className="  btn-accent">
+                  <a href="/signup" style={{
+                    padding: "10px 20px",
+                    backgroundColor: "#8B4513", // Brown coffee color
+                    color: "white",
+                    border: "none",
+                    borderRadius: "8px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                  >
                     Create an Account
                   </a>
-                  <a href="/events" className="btn-outline-accent">
+                  <a href="/events" style={{
+                    padding: "10px 20px",
+                    backgroundColor: "#8B4513",  
+                    color: "white",
+                    border: "none",
+                    borderRadius: "8px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                  >
                     List an Event
                   </a>
-                  <a href="/contact" className="btn-outline-accent">
+                  <a href="/contact" style={{
+                    padding: "10px 20px",
+                    backgroundColor: "#8B4513",  
+                    color: "white",
+                    border: "none",
+                    borderRadius: "8px",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                  >
                     Contact Us
                   </a>
                 </div>
@@ -370,7 +438,7 @@ function Home() {
         </section>
       </div>
 
-    
+
     </>
   );
 }

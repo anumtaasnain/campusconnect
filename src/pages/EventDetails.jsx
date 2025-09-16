@@ -20,16 +20,16 @@ const EventDetails = () => {
   }
   const { cardsData } = event
   console.log(cardsData);
-  
+
 
   return (
     <div>
       {/* Banner Section */}
       <div className="banner">
-        <div className="container cat" style={{display:"flex" , flexDirection:"column" , justifyContent:'center' ,alignItems:'center' }} >
-          <h1 className="display-3 fw-bold" style={{color:"brwon"}}>{event.heading}</h1>
+        <div className="container cat" style={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center' }} >
+          <h1 className="display-3 fw-bold" style={{ color: "brwon" }}>{event.heading}</h1>
           <p className="lead text-dark">{event.p}</p>
-          <a href="#cards-section" className="btn btnBanner btn-custom  mt-3" style={{height:'60px' , width:'250px' , color:'balck'}} >
+          <a href="#cards-section" className="btn btnBanner btn-custom  mt-3" style={{ height: '60px', width: '250px', color: 'balck' }} >
             Explore More
           </a>
         </div>
@@ -73,9 +73,9 @@ const EventDetails = () => {
                       backgroundSize: "cover",
                       // minHeight: "150px",
                     }}
-                  > 
-                    <img src={card.img} alt="" style={{height:'200px' , width:'100%'}} />
-                    {/* <img src="https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?cs=srgb&dl=pexels-pixabay-302743.jpg&fm=jpg" alt="" /> */}
+                  >
+                    <img src={card.img} alt="" style={{ height: '200px', width: '100%' }} />
+
                   </div>
                   <div className="card-body">
                     <h5 className="card-title">{card.title}</h5>
@@ -94,13 +94,7 @@ const EventDetails = () => {
                       </div>
                     </div>
 
-                    <button
-                      className="btn btn-custom mt-3"
-                      data-bs-toggle="modal"
-                      data-bs-target={`#modal${idx}`}
-                    >
-                      View More
-                    </button>
+
                   </div>
                 </div>
               </div>
@@ -123,7 +117,7 @@ const EventDetails = () => {
                 />
               ) : (
                 <img
-                  src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1350&q=80"
+                  src="/1.avif"
                   alt="Fallback"
                   className="img-fluid rounded"
                 />
@@ -132,9 +126,7 @@ const EventDetails = () => {
             <div className="col-lg-6">
               <h3>{event.sideTxtH}</h3>
               <p>{event.sideTxtP}</p>
-              <a href="#" className="btn btn-custom">
-                View Full Achievements
-              </a>
+
             </div>
           </div>
         </div>

@@ -122,7 +122,7 @@ function Navbar() {
                 <NavLink
                   to="/signup"
                   className={({ isActive }) =>
-                    "btn btn-outline-accent btnNav" +
+                    "btn btn-outline-accent btnNav text-light" +
                     (isActive ? " active" : "")
                   }
                 >

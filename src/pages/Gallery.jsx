@@ -32,19 +32,19 @@ function Gallery() {
   }, [bookmarked]);
 
   const toggleBookmark = (eventId) => {
-  setBookmarked((prev) => {
-    let updated;
-    if (prev.includes(eventId)) {
-      updated = prev.filter((id) => id !== eventId);
-    } else {
-      updated = [...prev, eventId];
-    }
+    setBookmarked((prev) => {
+      let updated;
+      if (prev.includes(eventId)) {
+        updated = prev.filter((id) => id !== eventId);
+      } else {
+        updated = [...prev, eventId];
+      }
 
-    // Immediately update localStorage
-    localStorage.setItem("bookmarkedEvents", JSON.stringify(updated));
-    return updated;
-  });
-};
+      // Immediately update localStorage
+      localStorage.setItem("bookmarkedEvents", JSON.stringify(updated));
+      return updated;
+    });
+  };
   const categories = [
     "All",
     ...Array.from(new Set(eventsData.flatMap((event) => event.category.map((c) => c.toLowerCase())))),

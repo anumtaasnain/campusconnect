@@ -41,7 +41,7 @@ function Footer() {
                 <Link to='/gallery'>Photo Gallery</Link>
               </li>
               <li>
-                <Link>Campus Map</Link>
+                <Link to='/register'>Register Event</Link>
               </li>
               <li>
                 <Link to='/login'>Student Login</Link>

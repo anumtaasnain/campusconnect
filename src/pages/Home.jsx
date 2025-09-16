@@ -201,7 +201,7 @@ function Home({ selectedRole }) {
           hoursEl.textContent =
           minutesEl.textContent =
           secondsEl.textContent =
-            "00";
+          "00";
         statusEl.textContent = "🎉 36 hours have passed!";
         return;
       }
@@ -226,7 +226,8 @@ function Home({ selectedRole }) {
   const filteredData =
     selectedCategory === "All"
       ? eventsData
-      : eventsData.filter((e) => e.category === selectedCategory);
+      : eventsData.filter((e) => e.cat === selectedCategory);
+
 
   const getWelcomeMessage = () => {
     if (selectedRole === "student")
@@ -302,7 +303,7 @@ function Home({ selectedRole }) {
                         Showcase your technical skills and innovations. Open to
                         all departments.
                       </p>
-                      <a href="#" className="btn-accent mt-2">
+                      <a href="#" className="btn btn-accent mt-2">
                         View Details
                       </a>
                     </div>
@@ -387,7 +388,7 @@ function Home({ selectedRole }) {
                         Explore a variety of clubs and societies that match your
                         interests.
                       </p>
-                      <a href="#" className="btn-accent mt-2">
+                      <a href="#" className="btn btn-accent mt-2">
                         Explore Clubs
                       </a>
                     </div>
@@ -396,7 +397,7 @@ function Home({ selectedRole }) {
                 <div className="d-flex gap-3 mt-3">
                   <div className="mini-card flex-fill">
                     <img
-                      src="https://images.unsplash.com/photo-1506748686214-e91022986f34?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6c75646519494e7e1d325b6d321b4c3e"
+                      src="/11.avif"
                       alt="Academic Workshop"
                     />
                     <div
@@ -416,7 +417,7 @@ function Home({ selectedRole }) {
 
                   <div className="mini-card flex-fill">
                     <img
-                      src="https://images.unsplash.com/photo-1549488344-938b8163f910?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6c75646519494e7e1d325b6d321b4c3e"
+                      src="/12.avif"
                       alt="Guest Lecture"
                     />
                     <div
@@ -507,12 +508,12 @@ function Home({ selectedRole }) {
                         transition: "all 0.2s ease-in-out",
                       }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.backgroundColor =
-                          selectedCategory === category ? "#5c3010" : "#f3f3f3")
+                      (e.currentTarget.style.backgroundColor =
+                        selectedCategory === category ? "#5c3010" : "#f3f3f3")
                       }
                       onMouseLeave={(e) =>
-                        (e.currentTarget.style.backgroundColor =
-                          selectedCategory === category ? "#8B4513" : "#fff")
+                      (e.currentTarget.style.backgroundColor =
+                        selectedCategory === category ? "#8B4513" : "#fff")
                       }
                     >
                       {category} Events
@@ -626,6 +627,7 @@ function Home({ selectedRole }) {
                                 border: "2px solid #8B4513",
                                 backgroundColor: "#8B4513",
                                 color: "white",
+
                                 fontSize: "12px",
                                 fontWeight: "600",
                                 cursor: "pointer",
@@ -640,7 +642,7 @@ function Home({ selectedRole }) {
                                 e.target.style.color = "white";
                               }}
                             >
-                              Details
+                              View Details
                             </button>
                           </Link>
 
@@ -651,11 +653,12 @@ function Home({ selectedRole }) {
                                 borderRadius: "10px",
                                 border: "2px solid #8B4513",
                                 backgroundColor: "white",
-                                color: "#8B4513",
+                                color: "white",
                                 fontSize: "12px",
                                 fontWeight: "600",
                                 cursor: "pointer",
                                 transition: "all 0.3s ease",
+                                textDecoration: "none"
                               }}
                               onMouseEnter={(e) => {
                                 e.target.style.backgroundColor = "#8B4513";
@@ -663,7 +666,7 @@ function Home({ selectedRole }) {
                               }}
                               onMouseLeave={(e) => {
                                 e.target.style.backgroundColor = "white";
-                                e.target.style.color = "#8B4513";
+                                e.target.style.color = "white";
                               }}
                             >
                               Register

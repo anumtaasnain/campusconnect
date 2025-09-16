@@ -94,12 +94,12 @@ function Events() {
                       transition: "all 0.2s ease-in-out",
                     }}
                     onMouseEnter={(e) =>
-                      (e.currentTarget.style.backgroundColor =
-                        selectedCategory === category ? "#5c3010" : "#f3f3f3")
+                    (e.currentTarget.style.backgroundColor =
+                      selectedCategory === category ? "#5c3010" : "#f3f3f3")
                     }
                     onMouseLeave={(e) =>
-                      (e.currentTarget.style.backgroundColor =
-                        selectedCategory === category ? "#8B4513" : "#fff")
+                    (e.currentTarget.style.backgroundColor =
+                      selectedCategory === category ? "#8B4513" : "#fff")
                     }
                   >
                     {category} Events
@@ -215,7 +215,7 @@ function Events() {
                 marginBottom: "20px",
               }}
             >
-              <div className="filter-btn active" data-filter="all">
+              <div className="filter-btn active" data-filter="all" >
                 All Events
               </div>
               <div className="filter-btn" data-filter="technical">
