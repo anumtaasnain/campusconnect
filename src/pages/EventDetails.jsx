@@ -27,7 +27,7 @@ const EventDetails = () => {
       {/* Banner Section */}
       <div className="banner">
         <div className="container cat" style={{ display: "flex", flexDirection: "column", justifyContent: 'center', alignItems: 'center' }} >
-          <h1 className="display-3 fw-bold" style={{ color: "brwon" }}>{event.heading}</h1>
+          <h1 className="display-3 fw-bold" style={{ color: "white" }}>{event.heading}</h1>
           <p className="lead text-dark">{event.p}</p>
           <a href="#cards-section" className="btn btnBanner btn-custom  mt-3" style={{ height: '60px', width: '250px', color: 'balck' }} >
             Explore More
