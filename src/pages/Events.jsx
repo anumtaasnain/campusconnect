@@ -215,19 +215,19 @@ function Events() {
                 marginBottom: "20px",
               }}
             >
-              <div className="filter-btn active" data-filter="all" >
+              <div className="filter-btn active ab" data-filter="all" >
                 All Events
               </div>
-              <div className="filter-btn" data-filter="technical">
+              <div className="filter-btn ab" data-filter="technical">
                 Technical
               </div>
-              <div className="filter-btn" data-filter="cultural">
+              <div className="filter-btn ab" data-filter="cultural">
                 Cultural
               </div>
-              <div className="filter-btn" data-filter="sports">
+              <div className="filter-btn ab" data-filter="sports">
                 Sports
               </div>
-              <div className="filter-btn" data-filter="workshop">
+              <div className="filter-btn ab" data-filter="workshop">
                 Workshops
               </div>
             </div>

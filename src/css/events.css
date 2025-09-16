@@ -96,7 +96,8 @@
   cursor: pointer;
   transition: background-color 0.2s;
   margin-top: 10px;
-  display: block; /* Make it block for full width if needed */
+  display: block;
+  /* Make it block for full width if needed */
 }
 
 .register-btn:hover {
@@ -108,13 +109,16 @@
   .events-hero {
     height: 200px;
   }
+
   .events-hero .overlay {
     padding: 20px;
   }
+
   .filter-buttons {
     gap: 0.5rem;
     margin: 1.5rem 0 2rem;
   }
+
   .event-card img {
     height: 150px;
   }
@@ -124,16 +128,20 @@
   .events-hero {
     height: 150px;
   }
+
   .events-hero .overlay {
     padding: 15px;
   }
+
   .section-title {
     font-size: 1.5rem;
   }
+
   .filter-buttons {
     gap: 0.3rem;
     margin: 1rem 0 1.5rem;
   }
+
   .event-card img {
     height: 120px;
   }
@@ -143,16 +151,20 @@
   .events-hero {
     height: 120px;
   }
+
   .events-hero .overlay {
     padding: 10px;
   }
+
   .section-title {
     font-size: 1.2rem;
   }
+
   .filter-buttons {
     gap: 0.2rem;
     margin: 0.5rem 0 1rem;
   }
+
   .event-card img {
     height: 100px;
   }
@@ -162,17 +174,28 @@
   .events-hero {
     height: 100px;
   }
+
   .events-hero .overlay {
     padding: 8px;
   }
+
   .section-title {
     font-size: 1rem;
   }
+
   .filter-buttons {
     gap: 0.1rem;
     margin: 0.3rem 0 0.8rem;
   }
+
   .event-card img {
     height: 80px;
   }
+}
+
+.ab {
+  padding: 12px !important;
+  border-radius: 10px !important;
+  font-weight: bold;
+ font-size: 15px !important;
 }
