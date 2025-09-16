@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import "../css/navbar.css";
 
 function Navbar() {
   const [userName, setUserName] = useState("");
@@ -21,7 +22,9 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container-xl">
-        <a className="navbar-brand brand" href="">CampusConnect</a>
+        <a className="navbar-brand brand" href="">
+          CampusConnect
+        </a>
         <button
           className="navbar-toggler"
           type="button"
@@ -32,91 +35,103 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon" />
         </button>
-       <div className="collapse navbar-collapse" id="navmenu">
-  <ul className="navbar-nav mx-auto align-items-lg-center">
-    <li className="nav-item">
-      <NavLink
-        to="/"
-        className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-      >
-        Home
-      </NavLink>
-    </li>
-    <li className="nav-item">
-      <NavLink
-        to="/events"
-        className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-      >
-        Events
-      </NavLink>
-    </li>
-    <li className="nav-item">
-      <NavLink
-        to="/calendar"
-        className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-      >
-        Calendar
-      </NavLink>
-    </li>
-    <li className="nav-item">
-      <NavLink
-        to="/gallery"
-        className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-      >
-        Gallery
-      </NavLink>
-    </li>
-    <li className="nav-item">
-      <NavLink
-        to="/about"
-        className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-      >
-        About
-      </NavLink>
-    </li>
-    <li className="nav-item">
-      <NavLink
-        to="/contact"
-        className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-      >
-        Contact
-      </NavLink>
-    </li>
-  </ul>
+        <div className="collapse navbar-collapse" id="navmenu">
+          <ul className="navbar-nav mx-auto align-items-lg-center">
+            <li className="nav-item">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : "")
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/events"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : "")
+                }
+              >
+                Events
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/calendar"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : "")
+                }
+              >
+                Calendar
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/gallery"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : "")
+                }
+              >
+                Gallery
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : "")
+                }
+              >
+                About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  "nav-link" + (isActive ? " active" : "")
+                }
+              >
+                Contact
+              </NavLink>
+            </li>
+          </ul>
 
-  {/* Right side buttons */}
-  <ul className="navbar-nav ms-auto align-items-lg-center">
-    {userName ? (
-      <>
-        <li className="nav-item ms-3">
-          <span className="text-dark btn-sm btnNav">
-            <i className="bi bi-person me-1" /> {userName}
-          </span>
-        </li>
-        <li className="nav-item ms-2">
-          <button
-            className="btn btn-outline-danger  text-light btn-sm"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-        </li>
-      </>
-    ) : (
-      <li className="nav-item ms-3">
-        <NavLink
-          to="/signup"
-          className={({ isActive }) =>
-            "btn btn-outline-accent btnNav" + (isActive ? " active" : "")
-          }
-        >
-          <i className="bi bi-person me-1" /> Signup
-        </NavLink>
-      </li>
-    )}
-  </ul>
-</div>
-
+          {/* Right side buttons */}
+          <ul className="navbar-nav ms-auto align-items-lg-center">
+            {userName ? (
+              <>
+                <li className="nav-item ms-3">
+                  <span className="text-dark btn-sm btnNav">
+                    <i className="bi bi-person me-1" /> {userName}
+                  </span>
+                </li>
+                <li className="nav-item ms-2">
+                  <button
+                    className="btn btn-outline-danger  text-light btn-sm"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item ms-3">
+                <NavLink
+                  to="/signup"
+                  className={({ isActive }) =>
+                    "btn btn-outline-accent btnNav" +
+                    (isActive ? " active" : "")
+                  }
+                >
+                  <i className="bi bi-person me-1" /> Signup
+                </NavLink>
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
     </nav>
   );

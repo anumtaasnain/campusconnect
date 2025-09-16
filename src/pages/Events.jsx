@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import cards from "../Json/home.json";
+import '../css/events.css'
 import eventsData from "../Json/events.json"; // JSON file
 import { Link } from "react-router-dom";
 
 function Events() {
   useEffect(() => {
-    // Filter functionality for events
+    // Filter functionality for previous events (scoped to previous section)
     document.querySelectorAll(".filter-btn").forEach((button) => {
       button.addEventListener("click", () => {
         // Remove active class from all buttons
@@ -18,8 +19,8 @@ function Events() {
 
         const filter = button.getAttribute("data-filter");
 
-        // Show/hide events based on filter
-        document.querySelectorAll(".event-card").forEach((card) => {
+        // Show/hide events based on filter (scoped to previous-events)
+        document.querySelectorAll(".previous-events .event-card").forEach((card) => {
           if (
             filter === "all" ||
             card.getAttribute("data-category").toLowerCase() === filter
@@ -53,7 +54,6 @@ function Events() {
         </div>
       </section>
 
-      {/* Upcoming Events */}
       {/* Upcoming Events */}
       <div className="container">
         <div className="row mt-5">
@@ -122,12 +122,11 @@ function Events() {
                 <div
                   key={upCard.id}
                   style={{
-                    flex: "1 1 calc(25% - 20px)",
-                    // maxWidth: "calc(25% - 20px)",
+                    flex: "0 1 280px", // No grow, basis 280px
                     minWidth: "250px",
+                    maxWidth: "280px", // Prevent stretching
                     background: "#fff",
                     borderRadius: "12px",
-                    // boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
                     overflow: "hidden",
                     transition: "transform 0.2s ease",
                     cursor: "pointer",
@@ -144,16 +143,15 @@ function Events() {
                     data-category={upCard.category.toLowerCase()}
                   >
                     <Link to={`/EventsCardsDet/${upCard.id}`}>
-                      
-                    <img
-                      src={upCard.img}
-                      alt={upCard.heading}
-                      style={{
-                        width: "100%",
-                        height: "180px",
-                        objectFit: "cover",
-                      }}
-                    />
+                      <img
+                        src={upCard.img}
+                        alt={upCard.heading}
+                        style={{
+                          width: "100%",
+                          height: "180px",
+                          objectFit: "cover",
+                        }}
+                      />
                     </Link>
                     <div style={{ padding: "15px" }}>
                       <div
@@ -188,9 +186,8 @@ function Events() {
                       >
                         {upCard.category}
                       </div>
-                      
                       <Link to={'/register'}>
-                        <button>Register</button>
+                        <button className="register-btn">Register</button>
                       </Link>
                     </div>
                   </div>
@@ -235,9 +232,9 @@ function Events() {
               </div>
             </div>
 
-            {/* EVENTS LIST */}
+            {/* EVENTS LIST - Added wrapper class for scoping */}
             <div
-              className="row"
+              className="row previous-events"
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -249,12 +246,11 @@ function Events() {
                 <div
                   key={event.id}
                   style={{
-                    flex: "1 1 calc(25% - 20px)",
-                    // maxWidth: "calc(25% - 20px)",
+                    flex: "0 1 280px", // No grow, basis 280px
                     minWidth: "250px",
+                    maxWidth: "280px", // Prevent stretching
                     background: "#fff",
                     borderRadius: "12px",
-                    // boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
                     overflow: "hidden",
                     transition: "transform 0.2s ease",
                     cursor: "pointer",

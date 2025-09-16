@@ -7,40 +7,95 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import eventsData from "../Json/EventsCards.json";
+import "../css/home.css";
 
-
-function Home({  selectedRole }) {
-  const tl = gsap.timeline();
+function Home({ selectedRole }) {
   const containerRef = useRef();
+  const heroRef = useRef(); // Ref for entire hero section
   const leftSecRef = useRef();
   const rightSecRef = useRef();
-
-
+  const leftCardRef = useRef();
+  const rightCardRef = useRef();
+  const countdownRef = useRef();
+  const eventsSectionRef = useRef(); // Ref for upcoming events section
+  const categorySectionRef = useRef(); // Ref for events by category
+  const exploreSectionRef = useRef(); // Ref for explore categories
+  const testimonialsRef = useRef(); // Ref for testimonials
 
   useGSAP(
     () => {
-      tl.fromTo(
-        leftSecRef.current,
-        { x: -500, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1, ease: "power3.out" }
-      );
-      tl.fromTo(
-        rightSecRef.current,
-        { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 1, ease: "back.out(1.7)", delay: 0.3 }
-      );
+      // Scroll-triggered animations for hero section (triggers when hero comes into view)
+      ScrollTrigger.create({
+        trigger: heroRef.current,
+        start: "top 90%", // Trigger when top of hero is 90% from top of viewport
+        onEnter: () => {
+          gsap.fromTo(
+            leftSecRef.current,
+            { x: -500, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+            }
+          );
 
-      tl.from(".countdown-container .time-box", {
-        stagger: {
-          duration: 0.3,
-          amount: 1,
-          grid: [1, 1],
-          axis: "y",
-          ease: "circ.inOut",
-          from: "random",
+          gsap.fromTo(
+            leftCardRef.current,
+            { x: -500, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              delay: 0.2,
+            }
+          );
+
+          gsap.fromTo(
+            rightCardRef.current,
+            { x: 100, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+              delay: 0.4,
+            }
+          );
+
+          gsap.fromTo(
+            rightSecRef.current,
+            { scale: 0, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 1,
+              ease: "back.out(1.7)",
+              delay: 0.6,
+            }
+          );
         },
       });
 
+      // Scroll-triggered animations for countdown boxes
+      gsap.fromTo(
+        countdownRef.current.querySelectorAll(".time-box"),
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: countdownRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Scroll-triggered animations for event cards
       gsap.utils.toArray(".event-card").forEach((card, i) => {
         gsap.fromTo(
           card,
@@ -58,12 +113,79 @@ function Home({  selectedRole }) {
           }
         );
       });
+
+      // Scroll-triggered animations for Events by Category section
+      ScrollTrigger.create({
+        trigger: categorySectionRef.current,
+        start: "top 85%",
+        onEnter: () => {
+          gsap.fromTo(
+            categorySectionRef.current.querySelectorAll(".evByCat"),
+            { y: 50, opacity: 0, scale: 0.9 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "back.out(1.7)",
+            }
+          );
+        },
+      });
+
+      // Scroll-triggered animations for Explore Categories section
+      ScrollTrigger.create({
+        trigger: exploreSectionRef.current,
+        start: "top 85%",
+        onEnter: () => {
+          gsap.fromTo(
+            exploreSectionRef.current.querySelector(".left"),
+            { x: -200, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 1,
+              ease: "power3.out",
+            }
+          );
+          gsap.fromTo(
+            exploreSectionRef.current.querySelectorAll(".right .category-item"),
+            { x: 200, opacity: 0, scale: 0.8 },
+            {
+              x: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+              stagger: 0.2,
+              ease: "back.out(1.7)",
+            }
+          );
+        },
+      });
+
+      // Scroll-triggered animations for Testimonials
+      gsap.fromTo(
+        testimonialsRef.current.querySelectorAll(".testimonial-card"),
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: testimonialsRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
     },
     { scope: containerRef }
   );
 
   useEffect(() => {
-    const eventDate = new Date(Date.now() + 36 * 60 * 60 * 1000);
+    const eventDate = new Date(Date.now() + 36 * 60 * 60 * 1000); // 36 hours from now
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
@@ -99,16 +221,13 @@ function Home({  selectedRole }) {
     return () => clearInterval(timer);
   }, []);
 
-  
-  
-
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredData =
-  selectedCategory === "All"
-    ? eventsData
-    : eventsData.filter((e) => e.category === selectedCategory);
- // yaha role ka message show karenge
+    selectedCategory === "All"
+      ? eventsData
+      : eventsData.filter((e) => e.category === selectedCategory);
+
   const getWelcomeMessage = () => {
     if (selectedRole === "student")
       return "🎓 Welcome Student! Explore your campus events and opportunities.";
@@ -144,11 +263,11 @@ function Home({  selectedRole }) {
         </div>
       </section>
 
-      <section className="hero">
+      <section className="hero" ref={heroRef}>
         <div className="container">
           <div className="row g-4 align-items-center mainCon">
             <div className="col-lg-6 leftCon" ref={leftSecRef}>
-              <div className="hero-card">
+              <div className="hero-card" ref={leftCardRef}>
                 <div>
                   <div className="d-flex justify-content-between align-items-start">
                     <div>
@@ -235,7 +354,7 @@ function Home({  selectedRole }) {
             </div>
 
             <div className="col-lg-6 rightCard" ref={rightSecRef}>
-              <div className="hero-card">
+              <div className="hero-card" ref={rightCardRef}>
                 <div>
                   <div className="d-flex justify-content-between align-items-start">
                     <div>
@@ -319,29 +438,21 @@ function Home({  selectedRole }) {
             </div>
           </div>
 
-          <div id="countdown" className="countdown-container">
+          <div id="countdown" className="countdown-container" ref={countdownRef}>
             <div className="time-box">
-              <span className="num" id="days">
-                00
-              </span>
+              <span className="num" id="days">00</span>
               <span className="label">Days</span>
             </div>
             <div className="time-box">
-              <span className="num" id="hours">
-                00
-              </span>
+              <span className="num" id="hours">00</span>
               <span className="label">Hours</span>
             </div>
             <div className="time-box">
-              <span className="num" id="minutes">
-                00
-              </span>
+              <span className="num" id="minutes">00</span>
               <span className="label">Minutes</span>
             </div>
             <div className="time-box">
-              <span className="num" id="seconds">
-                00
-              </span>
+              <span className="num" id="seconds">00</span>
               <span className="label">Seconds</span>
             </div>
           </div>
@@ -357,195 +468,226 @@ function Home({  selectedRole }) {
           ></p>
         </div>
 
-        <div className="container">
+        <div className="container" ref={eventsSectionRef}>
           <div className="row mt-5">
             <div className="col-12">
               <h3 className="section-title">Upcoming Events</h3>
-              <div className="filter-buttons" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "20px", justifyContent: "center" , borderRadius:"10px" }}>
-  {["All", "Technical", "Cultural", "Sports", "Academic", "Workshop"].map((category) => (
-    <div
-      key={category}
-      onClick={() => setSelectedCategory(category === "All" ? "All" : category)}
-      style={{
-        padding: "8px 18px",
-        borderRadius: "10px",
-        border: selectedCategory === category ? "2px solid #8B4513" : "1px solid #ccc",
-        backgroundColor: selectedCategory === category ? "#8B4513" : "#fff",
-        color: selectedCategory === category ? "#fff" : "#333",
-        cursor: "pointer",
-        fontSize: "14px",
-        fontWeight: "500",
-        transition: "all 0.2s ease-in-out",
-      }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = selectedCategory === category ? "#5c3010" : "#f3f3f3")}
-      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = selectedCategory === category ? "#8B4513" : "#fff")}
-    >
-      {category} Events
-    </div>
-  ))}
-</div><div className="row">
+              <div
+                className="filter-buttons"
+                style={{
+                  display: "flex",
+                  gap: "12px",
+                  flexWrap: "wrap",
+                  marginBottom: "20px",
+                  justifyContent: "center",
+                  borderRadius: "10px",
+                }}
+              >
+                {["All", "Technical", "Cultural", "Sports", "Academic", "Workshop"].map(
+                  (category) => (
+                    <div
+                      key={category}
+                      onClick={() =>
+                        setSelectedCategory(category === "All" ? "All" : category)
+                      }
+                      style={{
+                        padding: "8px 18px",
+                        borderRadius: "10px",
+                        border:
+                          selectedCategory === category
+                            ? "2px solid #8B4513"
+                            : "1px solid #ccc",
+                        backgroundColor:
+                          selectedCategory === category ? "#8B4513" : "#fff",
+                        color:
+                          selectedCategory === category ? "#fff" : "#333",
+                        cursor: "pointer",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        transition: "all 0.2s ease-in-out",
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          selectedCategory === category ? "#5c3010" : "#f3f3f3")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          selectedCategory === category ? "#8B4513" : "#fff")
+                      }
+                    >
+                      {category} Events
+                    </div>
+                  )
+                )}
+              </div>
+              <div className="row">
                 {filteredData.map((upCard) => (
-  <div
-    className="col-3"
-    key={upCard.id}
-    style={{ marginBottom: "20px" }}
-  >
-    <div
-      className="event-card"
-      data-category={upCard.category?.toLowerCase()}
-      style={{
-        position: "relative",
-        borderRadius: "15px",
-        overflow: "hidden",
-        boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-        background: "white",
-        transition: "transform 0.3s ease"
-      }}
-    >
-      <div 
-        className="event-category" 
-        style={{
-          position: "absolute", 
-          top: "10px",
-          right: "10px",
-          backgroundColor: "rgba(139, 69, 19, 0.9)",
-          color: "white",
-          padding: "4px 12px",
-          borderRadius: "20px",
-          fontSize: "12px",
-          fontWeight: "500",
-          zIndex: 2
-        }}
-      >
-        {upCard.cat || "General"}
-      </div>
-      
-      <img 
-        src={upCard.img || "default-image.jpg"} 
-        alt={upCard.heading}
-        style={{
-          width: "100%",
-          height: "200px",
-          objectFit: "cover"
-        }}
-      />
-      
-      <div 
-        className="event-card-body"
-        style={{
-          padding: "20px"
-        }}
-      >
-        <div 
-          className="event-date"
-          style={{
-            color: "#8B4513",
-            fontSize: "14px",
-            fontWeight: "600",
-            marginBottom: "8px"
-          }}
-        >
-          {upCard.date || "TBA"}
-        </div>
-        
-        <h5 style={{
-          fontSize: "18px",
-          fontWeight: "700",
-          color: "#333",
-          marginBottom: "10px",
-          lineHeight: "1.3"
-        }}>
-          {upCard.heading}
-        </h5>
-        
-        <p style={{
-          color: "#666",
-          fontSize: "14px",
-          lineHeight: "1.5",
-          marginBottom: "15px",
-          height: "60px",
-          overflow: "hidden",
-          display: "-webkit-box",
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: "vertical"
-        }}>
-          {upCard.desc || upCard.p}
-        </p>
-        
-        <div
-          style={{
-            display: "flex",
-            gap: "8px",
-            marginTop: "15px",
-          }}
-        >
-          <Link to={`/EventsCardsDet/${upCard.id}`}>
-            <button
-              style={{
-                padding: "8px 20px",
-                borderRadius: "10px",
-                border: "2px solid #8B4513",
-                backgroundColor: "#8B4513",
-                color: "white",
-                fontSize: "12px",
-                fontWeight: "600",
-                cursor: "pointer",
-                transition: "all 0.3s ease"
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = "white";
-                e.target.style.color = "#8B4513";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "#8B4513";
-                e.target.style.color = "white";
-              }}
-            >
-              Details
-            </button>
-          </Link>
-          
-          <Link to={'/register'}>
-            <button
-              style={{
-                padding: "8px 20px",
-                borderRadius: "10px",
-                border: "2px solid #8B4513",
-                backgroundColor: "white",
-                color: "white",
-                fontSize: "12px",
-                fontWeight: "600",
-                cursor: "pointer",
-                transition: "all 0.3s ease"
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = "#8B4513";
-                e.target.style.color = "white";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "white";
-                e.target.style.color = "#8B4513";
-              }}
-            >
-              Register
-            </button>
-          </Link>
-        </div>
-      </div>
-    </div>
-  </div>
-))}
+                  <div
+                    className="col-3"
+                    key={upCard.id}
+                    style={{ marginBottom: "20px" }}
+                  >
+                    <div
+                      className="event-card"
+                      data-category={upCard.category?.toLowerCase()}
+                      style={{
+                        position: "relative",
+                        borderRadius: "15px",
+                        overflow: "hidden",
+                        boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+                        background: "white",
+                        transition: "transform 0.3s ease",
+                      }}
+                    >
+                      <div
+                        className="event-category"
+                        style={{
+                          position: "absolute",
+                          top: "10px",
+                          right: "10px",
+                          backgroundColor: "rgba(139, 69, 19, 0.9)",
+                          color: "white",
+                          padding: "4px 12px",
+                          borderRadius: "20px",
+                          fontSize: "12px",
+                          fontWeight: "500",
+                          zIndex: 2,
+                        }}
+                      >
+                        {upCard.cat || "General"}
+                      </div>
+
+                      <img
+                        src={upCard.img || "default-image.jpg"}
+                        alt={upCard.heading}
+                        style={{
+                          width: "100%",
+                          height: "200px",
+                          objectFit: "cover",
+                        }}
+                      />
+
+                      <div
+                        className="event-card-body"
+                        style={{ padding: "20px" }}
+                      >
+                        <div
+                          className="event-date"
+                          style={{
+                            color: "#8B4513",
+                            fontSize: "14px",
+                            fontWeight: "600",
+                            marginBottom: "8px",
+                          }}
+                        >
+                          {upCard.date || "TBA"}
+                        </div>
+
+                        <h5
+                          style={{
+                            fontSize: "18px",
+                            fontWeight: "700",
+                            color: "#333",
+                            marginBottom: "10px",
+                            lineHeight: "1.3",
+                          }}
+                        >
+                          {upCard.heading}
+                        </h5>
+
+                        <p
+                          style={{
+                            color: "#666",
+                            fontSize: "14px",
+                            lineHeight: "1.5",
+                            marginBottom: "15px",
+                            height: "60px",
+                            overflow: "hidden",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: "vertical",
+                          }}
+                        >
+                          {upCard.desc || upCard.p}
+                        </p>
+
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: "8px",
+                            marginTop: "15px",
+                          }}
+                        >
+                          <Link to={`/EventsCardsDet/${upCard.id}`}>
+                            <button
+                              style={{
+                                padding: "8px 20px",
+                                borderRadius: "10px",
+                                border: "2px solid #8B4513",
+                                backgroundColor: "#8B4513",
+                                color: "white",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                cursor: "pointer",
+                                transition: "all 0.3s ease",
+                              }}
+                              onMouseEnter={(e) => {
+                                e.target.style.backgroundColor = "white";
+                                e.target.style.color = "#8B4513";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.target.style.backgroundColor = "#8B4513";
+                                e.target.style.color = "white";
+                              }}
+                            >
+                              Details
+                            </button>
+                          </Link>
+
+                          <Link to={"/register"}>
+                            <button
+                              style={{
+                                padding: "8px 20px",
+                                borderRadius: "10px",
+                                border: "2px solid #8B4513",
+                                backgroundColor: "white",
+                                color: "#8B4513",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                cursor: "pointer",
+                                transition: "all 0.3s ease",
+                              }}
+                              onMouseEnter={(e) => {
+                                e.target.style.backgroundColor = "#8B4513";
+                                e.target.style.color = "white";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.target.style.backgroundColor = "white";
+                                e.target.style.color = "#8B4513";
+                              }}
+                            >
+                              Register
+                            </button>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        <div className="row mt-5 m-5 d-flex justify-content-around">
+        <div className="row mt-5 m-5 d-flex justify-content-around" ref={categorySectionRef}>
           <div className="col-12 text-center">
             <h3 className="section-title">Events by Category</h3>
           </div>
           {cards.events.map((card) => (
-            <div className="col-md-3 col-6 text-center evByCat" key={card.id} >
+            <div
+              className="col-md-3 col-6 text-center evByCat"
+              key={card.id}
+            >
               <div className="p-3">
                 <i
                   className="bi bi-cpu-fill"
@@ -566,13 +708,13 @@ function Home({  selectedRole }) {
           ))}
         </div>
 
-        <div className="category-container">
+        <div className="category-container" ref={exploreSectionRef}>
           <h2 className="section-title">
             <span style={{ color: "var(--text-primary)" }}>Explore</span>{" "}
             <span style={{ color: "var(--text-primary)" }}>Categories</span>
           </h2>
           <div className="category-grid">
-            <div className="left category-item"   >
+            <div className="left category-item">
               <video className="category-media" autoPlay loop muted playsInline>
                 <source src="./u.mp4" type="video/mp4" />
               </video>
@@ -582,7 +724,7 @@ function Home({  selectedRole }) {
               </div>
             </div>
             <div className="right">
-              <div className="category-item right-top" ref={rightSecRef}>
+              <div className="category-item right-top">
                 <video
                   className="category-media"
                   autoPlay
@@ -597,7 +739,7 @@ function Home({  selectedRole }) {
                   <button className="shop-btn">Explore Now</button>
                 </div>
               </div>
-              <div className="category-item right-bottom ">
+              <div className="category-item right-bottom">
                 <video
                   className="category-media"
                   autoPlay
@@ -605,7 +747,7 @@ function Home({  selectedRole }) {
                   muted
                   playsInline
                 >
-                  <source src="./l.m" type="video/mp4" />
+                  <source src="./l.mp4" type="video/mp4" />
                 </video>
                 <div className="overlay">
                   <h2 className="category-name">Previous Events</h2>
@@ -617,7 +759,7 @@ function Home({  selectedRole }) {
         </div>
       </section>
 
-      <section className="container py-5">
+      <section className="container py-5" ref={testimonialsRef}>
         <h2 className="section-title">What People Say</h2>
         <div className="row">
           <div className="col-md-4 mb-4">
