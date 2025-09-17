@@ -397,7 +397,7 @@ function Home({ selectedRole }) {
                 <div className="d-flex gap-3 mt-3">
                   <div className="mini-card flex-fill">
                     <img
-                      src="/11.avif"
+                      src="/11.png"
                       alt="Academic Workshop"
                     />
                     <div
@@ -417,7 +417,7 @@ function Home({ selectedRole }) {
 
                   <div className="mini-card flex-fill">
                     <img
-                      src="/12.avif"
+                      src="/12.png"
                       alt="Guest Lecture"
                     />
                     <div

@@ -14,13 +14,13 @@ import Feedback from "./pages/Feedback";
 import Registerevent from "./pages/Registerevent";
 import EventCalendar from "./pages/EventCalendar.jsx";
 import EventsCardsDet from "./pages/EventsCardsDet.jsx";
-import RoleSelector from "./components/RoleSelector"; // ✅ import your role selector
+import RoleSelector from "./components/RoleSelector"; 
 
 function App() {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
-    // check if role already exists in localStorage and is not expired
+   
     const savedRole = localStorage.getItem("selectedRole");
     const savedTimestamp = localStorage.getItem("roleTimestamp");
 
@@ -28,11 +28,11 @@ function App() {
       const now = Date.now();
       const diff = now - parseInt(savedTimestamp, 10);
 
-      if (diff < 10 * 60 * 1000) {
-        // ✅ less than 15 min old
+      if (diff < 5 * 60 * 1000) {
+       
         setRole(savedRole);
       } else {
-        // expired -> clear role
+       
         localStorage.removeItem("selectedRole");
         localStorage.removeItem("roleTimestamp");
       }

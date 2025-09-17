@@ -389,7 +389,7 @@ function Home() {
                   your activities, CampusConnect is here to help.
                 </p>
                 <div className="d-flex flex-wrap justify-content-center gap-3">
-                  <a href="/signup" style={{
+                  <Link to={`/signup`} style={{
                     padding: "10px 20px",
                     backgroundColor: "#8B4513", // Brown coffee color
                     color: "white",
@@ -402,8 +402,8 @@ function Home() {
                   }}
                   >
                     Create an Account
-                  </a>
-                  <a href="/events" style={{
+                  </Link>
+                  <Link to={`/events`} style={{
                     padding: "10px 20px",
                     backgroundColor: "#8B4513",  
                     color: "white",
@@ -416,8 +416,8 @@ function Home() {
                   }}
                   >
                     List an Event
-                  </a>
-                  <a href="/contact" style={{
+                  </Link>
+                  <Link to={`/contact`} style={{
                     padding: "10px 20px",
                     backgroundColor: "#8B4513",  
                     color: "white",
@@ -430,7 +430,7 @@ function Home() {
                   }}
                   >
                     Contact Us
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import "../css/gallery.css";
 
 const eventsData = [
-  { id: 1, imageThumbnail: "/18.avif", date: "February 28, 2024", category: ["sports", "2024"] },
-  { id: 2, imageThumbnail: "/17.avif", date: "November 22, 2023", category: ["sports", "2023"] },
-  { id: 3, imageThumbnail: "/3.avif", date: "March 8, 2024", category: ["technical", "2024"] },
-  { id: 4, imageThumbnail: "/20.avif", date: "April 5, 2024", category: ["cultural", "2024"] },
-  { id: 5, imageThumbnail: "/14.avif", date: "March 18, 2024", category: ["sports", "2024"] },
-  { id: 6, imageThumbnail: "/19.avif", date: "November 22, 2023", category: ["sports", "2023"] },
-  { id: 7, imageThumbnail: "/3.avif", date: "March 8, 2024", category: ["technical", "2024"] },
-  { id: 8, imageThumbnail: "/12.avif", date: "April 5, 2024", category: ["cultural", "2024"] },
-  { id: 9, imageThumbnail: "/5.avif", date: "March 18, 2024", category: ["sports", "2024"] },
-  { id: 10, imageThumbnail: "/5.avif", date: "March 18, 2022", category: ["sports", "2022"] },
-  { id: 11, imageThumbnail: "/5.avif", date: "March 18, 2021", category: ["sports", "2021"] },
+  { id: 1, imageThumbnail: "/18.png", date: "February 28, 2024", category: ["sports", "2024"] },
+  { id: 2, imageThumbnail: "/17.png", date: "November 22, 2023", category: ["sports", "2023"] },
+  { id: 3, imageThumbnail: "/3.png", date: "March 8, 2024", category: ["technical", "2024"] },
+  { id: 4, imageThumbnail: "/20.png", date: "April 5, 2024", category: ["cultural", "2024"] },
+  { id: 5, imageThumbnail: "/14.png", date: "March 18, 2024", category: ["sports", "2024"] },
+  { id: 6, imageThumbnail: "/19.png", date: "November 22, 2023", category: ["sports", "2023"] },
+  { id: 7, imageThumbnail: "/3.png", date: "March 8, 2024", category: ["technical", "2024"] },
+  { id: 8, imageThumbnail: "/12.png", date: "April 5, 2024", category: ["cultural", "2024"] },
+  { id: 9, imageThumbnail: "/5.png", date: "March 18, 2024", category: ["sports", "2024"] },
+  { id: 10, imageThumbnail: "/5.png", date: "March 18, 2022", category: ["sports", "2022"] },
+  { id: 11, imageThumbnail: "/5.png", date: "March 18, 2021", category: ["sports", "2021"] },
 ];
 
 function Gallery() {
