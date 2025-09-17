@@ -125,7 +125,7 @@
   text-align: center;
   box-shadow: 0 5px 15px rgba(60, 42, 30, 0.25);
   transition: transform 0.3s ease;
-  min-width: 70px;
+  min-width: 80px;
 }
 
 .time-box:hover {

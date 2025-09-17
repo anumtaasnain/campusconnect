@@ -627,11 +627,12 @@ function Home({ selectedRole }) {
                                 border: "2px solid #8B4513",
                                 backgroundColor: "#8B4513",
                                 color: "white",
-
                                 fontSize: "12px",
                                 fontWeight: "600",
                                 cursor: "pointer",
                                 transition: "all 0.3s ease",
+                                display: "inline-block",
+                                textDecoration: "none"
                               }}
                               onMouseEnter={(e) => {
                                 e.target.style.backgroundColor = "white";
@@ -658,7 +659,7 @@ function Home({ selectedRole }) {
                                 fontWeight: "600",
                                 cursor: "pointer",
                                 transition: "all 0.3s ease",
-                                textDecoration: "none"
+                                textDecoration: "none", display: "inline-block"
                               }}
                               onMouseEnter={(e) => {
                                 e.target.style.backgroundColor = "#8B4513";
@@ -688,7 +689,7 @@ function Home({ selectedRole }) {
           </div>
           {cards.events.map((card) => (
             <div
-              className="col-md-3 col-6 text-center evByCat"
+              className="col-md-3 col-sm-12 col-lg-3 col-6 text-center evByCat"
               key={card.id}
             >
               <div className="p-3">

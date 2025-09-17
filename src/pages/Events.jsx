@@ -187,7 +187,30 @@ function Events() {
                         {upCard.category}
                       </div>
                       <Link to={'/register'}>
-                        <button className="register-btn">Register</button>
+                        <button
+                              style={{
+                                padding: "8px 20px",
+                                borderRadius: "10px",
+                                border: "2px solid #8B4513",
+                                backgroundColor: "white",
+                                color: "white",
+                                fontSize: "12px",
+                                fontWeight: "600",
+                                cursor: "pointer",
+                                transition: "all 0.3s ease",
+                                textDecoration: "none", display: "inline-block"
+                              }}
+                              onMouseEnter={(e) => {
+                                e.target.style.backgroundColor = "#8B4513";
+                                e.target.style.color = "white";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.target.style.backgroundColor = "white";
+                                e.target.style.color = "white";
+                              }}
+                            >
+                              Register
+                            </button>
                       </Link>
                     </div>
                   </div>
