@@ -117,7 +117,7 @@ const EventDetails = () => {
                 />
               ) : (
                 <img
-                  src="/1.avif"
+                  src="/1.png"
                   alt="Fallback"
                   className="img-fluid rounded"
                 />
