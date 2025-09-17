@@ -26,7 +26,7 @@
   {
     "id": 4,
     "category": "Workshop",
-    "image": "1.avif", 
+    "image": "1.png", 
     "heading": "Public Speaking Workshop",
     "description": "Master the art of confident communication.",
     "event_date": "Oct 5, 2025"
@@ -42,7 +42,7 @@
   {
     "id": 6,
     "category": "Cultural",
-    "image": "2.avif", 
+    "image": "2.png", 
     "heading": "Art & Craft Exhibition",
     "description": "Display of creative artworks and handmade crafts.",
     "event_date": "Dec 1-3, 2025"
@@ -50,7 +50,7 @@
   {
     "id": 7,
     "category": "Sports",
-    "image": "3.avif", 
+    "image": "3.png", 
     "heading": "Football Championship",
     "description": "Exciting football league between top colleges.",
     "event_date": "Jan 15-17, 2026"

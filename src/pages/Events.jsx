@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import cards from "../Json/home.json";
 import '../css/events.css'
-import eventsData from "../Json/events.json"; // JSON file
+import eventsData from "../Json/events.json";
 import { Link } from "react-router-dom";
 
 function Events() {

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 /* ===== COLOR PALETTE ===== */
 :root {
   --soft-stone: #b0a8a8;
@@ -6,8 +8,8 @@
   --dark-chocolate: #3c2a1e;
   --muted: #f8f6f5;
   --text: #332f2f;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial;
+  font-family: 'Poppins', sans-serif !important;
+
 }
 
 body {
