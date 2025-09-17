@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/login.css";
+import { Link } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate(); // <-- navigate hook
@@ -92,7 +93,7 @@ function Login() {
             </button>
 
             <div className="signup-link">
-              Don&apos;t have an account? <a href="/signup">Sign up</a>
+              Don&apos;t have an account? <Link to="/signup">Signup</Link>
             </div>
           </form>
         </div>

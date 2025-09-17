@@ -6,6 +6,7 @@ function RoleSelector({ onRoleSelect }) {
   const [role, setRole] = useState(null);
 
   return (
+    <div className="rolemain">
     <div className="role-overlay">
       <div className="role-box">
         {!role ? (
@@ -36,6 +37,7 @@ function RoleSelector({ onRoleSelect }) {
           </>
         )}
       </div>
+    </div>
     </div>
   );
 }

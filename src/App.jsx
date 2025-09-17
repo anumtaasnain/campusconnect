@@ -28,7 +28,7 @@ function App() {
       const now = Date.now();
       const diff = now - parseInt(savedTimestamp, 10);
 
-      if (diff < 14 * 60 * 1000) {
+      if (diff < 10 * 60 * 1000) {
         // ✅ less than 15 min old
         setRole(savedRole);
       } else {
