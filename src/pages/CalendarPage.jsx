@@ -42,7 +42,7 @@ const eventData = [
 ];
 
 export default function MyCalendar() {
-  const [events] = useState(eventData); // Only load from JSON, no add functionality
+  const [events] = useState(eventData); 
 
   const handleEventClick = (info) => {
     alert(info.event.title + "\n" + info.event.extendedProps.description);

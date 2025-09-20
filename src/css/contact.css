@@ -1,8 +1,12 @@
  
-        .body {
+       @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+     font-family: 'Poppins', sans-serif !important;
+}
+       .body {
             background-color: var(--muted);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+ 
             line-height: 1.6;
             padding: 20px;
             background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
@@ -165,7 +169,7 @@
             padding: 15px;
             border: 2px solid var(--soft-stone);
             border-radius: 8px;
-            font-family: 'Inter', sans-serif;
+ 
             font-size: 1rem;
             transition: border-color 0.3s;
             background: rgba(255, 255, 255, 0.9);

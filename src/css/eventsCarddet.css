@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+     font-family: 'Poppins', sans-serif !important;
+}
 .hero-section {
             background: linear-gradient(rgba(60, 42, 30, 0.8), rgba(60, 42, 30, 0.8)), 
                         url('https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3') center/cover no-repeat;

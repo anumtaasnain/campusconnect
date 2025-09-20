@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../css/gallery.css";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const eventsData = [
   { id: 1, imageThumbnail: "/18.png", date: "February 28, 2024", category: ["sports", "2024"] },
@@ -16,6 +21,10 @@ const eventsData = [
 ];
 
 function Gallery() {
+  const containerRef = useRef();
+  const titleRef = useRef();
+  const filterButtonsRef = useRef();
+  const galleryGridRef = useRef();
   const [filter, setFilter] = useState("All");
   const [bookmarked, setBookmarked] = useState([]);
   const [showBookmarks, setShowBookmarks] = useState(false);
@@ -45,6 +54,7 @@ function Gallery() {
       return updated;
     });
   };
+
   const categories = [
     "All",
     ...Array.from(new Set(eventsData.flatMap((event) => event.category.map((c) => c.toLowerCase())))),
@@ -63,12 +73,82 @@ function Gallery() {
     filteredEvents = filteredEvents.filter((event) => bookmarked.includes(event.id));
   }
 
+  useGSAP(() => {
+    // Title animation
+    ScrollTrigger.create({
+      trigger: titleRef.current,
+      start: "top 90%",
+      onEnter: () => {
+        gsap.fromTo(
+          titleRef.current,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+          }
+        );
+      },
+    });
+
+    // Filter buttons animation
+    ScrollTrigger.create({
+      trigger: filterButtonsRef.current,
+      start: "top 85%",
+      onEnter: () => {
+        gsap.fromTo(
+          filterButtonsRef.current.querySelectorAll(".filter-btn"),
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "back.out(1.7)",
+          }
+        );
+      },
+    });
+
+    // Gallery grid animation
+    ScrollTrigger.create({
+      trigger: galleryGridRef.current,
+      start: "top 85%",
+      onEnter: () => {
+        gsap.fromTo(
+          galleryGridRef.current.querySelectorAll(".gallery-card"),
+          { y: 100, opacity: 0, scale: 0.9 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "back.out(1.7)",
+          }
+        );
+        gsap.fromTo(
+          galleryGridRef.current.querySelector("p"),
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: 0.3,
+          }
+        );
+      },
+    });
+  }, { scope: containerRef });
+
   return (
-    <div className="gallery-page">
-      <h2 className="gallery-title">Campus Events Gallery</h2>
+    <div className="gallery-page" ref={containerRef}>
+      <h2 className="gallery-title" ref={titleRef}>Campus Events Gallery</h2>
 
       {/* Filter Buttons */}
-      <div className="filter-buttons">
+      <div className="filter-buttons" ref={filterButtonsRef}>
         {categories.map((cat) => (
           <button
             key={cat}
@@ -89,7 +169,7 @@ function Gallery() {
       </div>
 
       {/* Gallery Grid */}
-      <div className="gallery-grid">
+      <div className="gallery-grid" ref={galleryGridRef}>
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event) => (
             <div key={event.id} className="gallery-card">

@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+     font-family: 'Poppins', sans-serif !important;
+}
 .events-hero {
   background: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200") center/cover no-repeat;
   height: 280px;

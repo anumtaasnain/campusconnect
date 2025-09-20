@@ -22,7 +22,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container-xl">
-        <a className="navbar-brand brand" href="">
+        <a className="navbar-brand brand" style={{ color:" #8b4513 !important" }}>
           CampusConnect
         </a>
         <button

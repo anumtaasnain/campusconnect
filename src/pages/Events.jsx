@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import cards from "../Json/home.json";
-import '../css/events.css'
+import '../css/events.css';
 import eventsData from "../Json/events.json";
 import { Link } from "react-router-dom";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function Events() {
+  const containerRef = useRef();
+  const heroRef = useRef();
+  const upcomingEventsRef = useRef();
+  const previousEventsRef = useRef();
+
   useEffect(() => {
     // Filter functionality for previous events (scoped to previous section)
     document.querySelectorAll(".filter-btn").forEach((button) => {
@@ -34,6 +44,110 @@ function Events() {
     });
   }, []);
 
+  useGSAP(() => {
+    // Hero section animation
+    ScrollTrigger.create({
+      trigger: heroRef.current,
+      start: "top 90%",
+      onEnter: () => {
+        gsap.fromTo(
+          heroRef.current.querySelector(".overlay"),
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
+          }
+        );
+      },
+    });
+
+    // Upcoming Events section animation
+    ScrollTrigger.create({
+      trigger: upcomingEventsRef.current,
+      start: "top 85%",
+      onEnter: () => {
+        gsap.fromTo(
+          upcomingEventsRef.current.querySelector(".section-title"),
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+          }
+        );
+        gsap.fromTo(
+          upcomingEventsRef.current.querySelectorAll(".filter-buttons div"),
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "back.out(1.7)",
+            delay: 0.2,
+          }
+        );
+        gsap.fromTo(
+          upcomingEventsRef.current.querySelectorAll(".event-card"),
+          { y: 100, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out",
+            delay: 0.3,
+          }
+        );
+      },
+    });
+
+    // Previous Events section animation
+    ScrollTrigger.create({
+      trigger: previousEventsRef.current,
+      start: "top 85%",
+      onEnter: () => {
+        gsap.fromTo(
+          previousEventsRef.current.querySelector(".section-title"),
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out",
+          }
+        );
+        gsap.fromTo(
+          previousEventsRef.current.querySelectorAll(".filter-btn"),
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "back.out(1.7)",
+            delay: 0.2,
+          }
+        );
+        gsap.fromTo(
+          previousEventsRef.current.querySelectorAll(".event-card"),
+          { y: 100, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out",
+            delay: 0.3,
+          }
+        );
+      },
+    });
+  }, { scope: containerRef });
+
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredData =
@@ -42,9 +156,9 @@ function Events() {
       : cards.upEvents.filter((e) => e.category === selectedCategory);
 
   return (
-    <div className="events-page">
+    <div className="events-page" ref={containerRef}>
       {/* HERO BANNER */}
-      <section className="events-hero">
+      <section className="events-hero" ref={heroRef}>
         <div className="overlay">
           <h1>Campus Events</h1>
           <p>
@@ -55,7 +169,7 @@ function Events() {
       </section>
 
       {/* Upcoming Events */}
-      <div className="container">
+      <div className="container" ref={upcomingEventsRef}>
         <div className="row mt-5">
           <div className="col-12">
             <h3 className="section-title">Upcoming Events</h3>
@@ -94,12 +208,12 @@ function Events() {
                       transition: "all 0.2s ease-in-out",
                     }}
                     onMouseEnter={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      selectedCategory === category ? "#5c3010" : "#f3f3f3")
+                      (e.currentTarget.style.backgroundColor =
+                        selectedCategory === category ? "#5c3010" : "#f3f3f3")
                     }
                     onMouseLeave={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      selectedCategory === category ? "#8B4513" : "#fff")
+                      (e.currentTarget.style.backgroundColor =
+                        selectedCategory === category ? "#8B4513" : "#fff")
                     }
                   >
                     {category} Events
@@ -122,9 +236,9 @@ function Events() {
                 <div
                   key={upCard.id}
                   style={{
-                    flex: "0 1 280px", // No grow, basis 280px
+                    flex: "0 1 280px",
                     minWidth: "250px",
-                    maxWidth: "280px", // Prevent stretching
+                    maxWidth: "280px",
                     background: "#fff",
                     borderRadius: "12px",
                     overflow: "hidden",
@@ -188,29 +302,30 @@ function Events() {
                       </div>
                       <Link to={'/register'}>
                         <button
-                              style={{
-                                padding: "8px 20px",
-                                borderRadius: "10px",
-                                border: "2px solid #8B4513",
-                                backgroundColor: "white",
-                                color: "white",
-                                fontSize: "12px",
-                                fontWeight: "600",
-                                cursor: "pointer",
-                                transition: "all 0.3s ease",
-                                textDecoration: "none", display: "inline-block"
-                              }}
-                              onMouseEnter={(e) => {
-                                e.target.style.backgroundColor = "#8B4513";
-                                e.target.style.color = "white";
-                              }}
-                              onMouseLeave={(e) => {
-                                e.target.style.backgroundColor = "white";
-                                e.target.style.color = "white";
-                              }}
-                            >
-                              Register
-                            </button>
+                          style={{
+                            padding: "8px 20px",
+                            borderRadius: "10px",
+                            border: "2px solid #8B4513",
+                            backgroundColor: "white",
+                            color: "white",
+                            fontSize: "12px",
+                            fontWeight: "600",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease",
+                            textDecoration: "none",
+                            display: "inline-block",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.target.style.backgroundColor = "#8B4513";
+                            e.target.style.color = "white";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.target.style.backgroundColor = "white";
+                            e.target.style.color = "white";
+                          }}
+                        >
+                          Register
+                        </button>
                       </Link>
                     </div>
                   </div>
@@ -222,7 +337,7 @@ function Events() {
       </div>
 
       {/* Previous Events - Updated Code */}
-      <div className="container">
+      <div className="container" ref={previousEventsRef}>
         <div className="row mt-5">
           <div className="col-12">
             <h3 className="section-title">Previous Events</h3>
@@ -238,7 +353,7 @@ function Events() {
                 marginBottom: "20px",
               }}
             >
-              <div className="filter-btn active ab" data-filter="all" >
+              <div className="filter-btn active ab" data-filter="all">
                 All Events
               </div>
               <div className="filter-btn ab" data-filter="technical">
@@ -269,9 +384,9 @@ function Events() {
                 <div
                   key={event.id}
                   style={{
-                    flex: "0 1 280px", // No grow, basis 280px
+                    flex: "0 1 280px",
                     minWidth: "250px",
-                    maxWidth: "280px", // Prevent stretching
+                    maxWidth: "280px",
                     background: "#fff",
                     borderRadius: "12px",
                     overflow: "hidden",

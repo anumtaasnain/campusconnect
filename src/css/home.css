@@ -1,5 +1,8 @@
 /* ===== HOME PAGE STYLES ===== */
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+     font-family: 'Poppins', sans-serif !important;
+}
 .img-banner {
   margin: 10px 0;
   width: 100%;
